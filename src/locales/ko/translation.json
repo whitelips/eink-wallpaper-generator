@@ -1,0 +1,41 @@
+{
+  "app": {
+    "title": "E-Ink 배경화면 생성기",
+    "description": "E-Ink 기기를 위한 아름다운 배경화면을 만들어보세요"
+  },
+  "form": {
+    "albumCover": "앨범 커버",
+    "uploadImage": "이미지 업로드",
+    "songTitle": "노래 제목",
+    "artist": "아티스트",
+    "lyrics": "가사 (한 줄에 한 가사씩 입력하세요)",
+    "devicePreset": "기기 프리셋",
+    "custom": "사용자 지정",
+    "width": "너비",
+    "height": "높이",
+    "colorMode": "색상 모드",
+    "color": "컬러",
+    "grayscale": "흑백",
+    "generateWallpaper": "배경화면 생성",
+    "download": "다운로드"
+  },
+  "devicePresets": {
+    "6inch": "6인치 E-리더기 (1072x1448)",
+    "7inch": "7인치 E-리더기 (1264x1680)",
+    "7.8inch": "7.8인치 E-리더기 (1404x1872)",
+    "10.3inch": "10.3인치 E-리더기 (1404x1872)",
+    "13inch": "13인치 E-리더기 (1650x2200)"
+  },
+  "player": {
+    "nowPlaying": "재생 중",
+    "prev": "이전",
+    "next": "다음",
+    "play": "재생",
+    "pause": "일시정지"
+  },
+  "errors": {
+    "imageRequired": "이미지를 업로드해주세요",
+    "songTitleRequired": "노래 제목을 입력해주세요",
+    "artistRequired": "아티스트 이름을 입력해주세요"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "app": {
+    "title": "E-Ink Wallpaper Generator",
+    "description": "Create beautiful wallpapers for your E-Ink devices"
+  },
+  "form": {
+    "albumCover": "Album Cover",
+    "uploadImage": "Upload Image",
+    "songTitle": "Song Title",
+    "artist": "Artist",
+    "lyrics": "Lyrics (one line per lyric)",
+    "devicePreset": "Device Preset",
+    "custom": "Custom",
+    "width": "Width",
+    "height": "Height",
+    "colorMode": "Color Mode",
+    "color": "Color",
+    "grayscale": "Grayscale",
+    "generateWallpaper": "Generate Wallpaper",
+    "download": "Download"
+  },
+  "devicePresets": {
+    "6inch": "6\" E-Reader (1072x1448)",
+    "7inch": "7\" E-Reader (1264x1680)",
+    "7.8inch": "7.8\" E-Reader (1404x1872)",
+    "10.3inch": "10.3\" E-Reader (1404x1872)",
+    "13inch": "13\" E-Reader (1650x2200)"
+  },
+  "player": {
+    "nowPlaying": "Now Playing",
+    "prev": "Previous",
+    "next": "Next",
+    "play": "Play",
+    "pause": "Pause"
+  },
+  "errors": {
+    "imageRequired": "Please upload an image",
+    "songTitleRequired": "Song title is required",
+    "artistRequired": "Artist name is required"
+  }
+}
