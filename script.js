@@ -4,8 +4,6 @@ const ctx = canvas.getContext('2d');
 const deviceSelect = document.getElementById('deviceSelect');
 const widthInput = document.getElementById('widthInput');
 const heightInput = document.getElementById('heightInput');
-const contrastSlider = document.getElementById('contrastSlider');
-const contrastValue = document.getElementById('contrastValue');
 const downloadBtn = document.getElementById('downloadBtn');
 
 const devicePresets = {
@@ -114,11 +112,6 @@ albumArtInput.addEventListener('change', (e) => {
 });
 
 
-contrastSlider.addEventListener('input', (e) => {
-    contrastValue.textContent = e.target.value + '%';
-    generatePattern();
-});
-
 // Real-time updates for all form inputs
 artistInput.addEventListener('input', generatePattern);
 titleInput.addEventListener('input', generatePattern);
@@ -128,24 +121,11 @@ widthInput.addEventListener('input', generatePattern);
 heightInput.addEventListener('input', generatePattern);
 
 
-function applyContrast(imageData, contrast) {
-    const data = imageData.data;
-    const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
-    
-    for (let i = 0; i < data.length; i += 4) {
-        data[i] = factor * (data[i] - 128) + 128;
-        data[i + 1] = factor * (data[i + 1] - 128) + 128;
-        data[i + 2] = factor * (data[i + 2] - 128) + 128;
-    }
-    
-    return imageData;
-}
 
 
 function generatePattern() {
     const width = parseInt(widthInput.value);
     const height = parseInt(heightInput.value);
-    const contrast = parseInt(contrastSlider.value) - 100;
     
     canvas.width = width;
     canvas.height = height;
@@ -441,12 +421,6 @@ function generatePattern() {
             const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
             data[i] = data[i + 1] = data[i + 2] = gray;
         }
-        ctx.putImageData(imageData, 0, 0);
-    }
-    
-    if (contrast !== 0) {
-        imageData = ctx.getImageData(0, 0, width, height);
-        imageData = applyContrast(imageData, contrast);
         ctx.putImageData(imageData, 0, 0);
     }
     

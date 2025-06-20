@@ -24,7 +24,6 @@ const languages = {
         colorMode: "Color Mode:",
         grayscale: "Grayscale (E-Ink)",
         color: "Color",
-        contrast: "Contrast:",
 
         // Buttons
         generateWallpaper: "Generate Wallpaper",
@@ -90,7 +89,6 @@ In the silence, hear my voice`
         colorMode: "색상 모드:",
         grayscale: "흑백 (전자잉크용)",
         color: "컬러",
-        contrast: "대비:",
 
         // Buttons
         generateWallpaper: "배경화면 생성",
@@ -162,7 +160,6 @@ function updateLanguage() {
     updateTextContent('label[for="titleInput"]', lang.title);
     updateTextContent('label[for="lyricsInput"]', lang.lyrics);
     updateTextContent('label[for="colorModeSelect"]', lang.colorMode);
-    updateTextContent('label[for="contrastSlider"]', lang.contrast);
     updateTextContent('#downloadBtn', lang.downloadPng);
 
     // Update form values

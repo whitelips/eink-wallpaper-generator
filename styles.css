@@ -158,11 +158,6 @@ input[type="checkbox"] {
     justify-content: center;
 }
 
-#contrastValue {
-    display: inline-block;
-    margin-left: 10px;
-    min-width: 50px;
-}
 
 .btn-primary,
 .btn-secondary {
