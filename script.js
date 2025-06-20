@@ -6,8 +6,6 @@ const widthInput = document.getElementById('widthInput');
 const heightInput = document.getElementById('heightInput');
 const contrastSlider = document.getElementById('contrastSlider');
 const contrastValue = document.getElementById('contrastValue');
-const ditheringCheck = document.getElementById('ditheringCheck');
-const generateBtn = document.getElementById('generateBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 
 const devicePresets = {
@@ -69,6 +67,7 @@ deviceSelect.addEventListener('change', (e) => {
         widthInput.disabled = false;
         heightInput.disabled = false;
     }
+    generatePattern();
 });
 
 const musicControls = document.getElementById('musicControls');
@@ -125,39 +124,9 @@ artistInput.addEventListener('input', generatePattern);
 titleInput.addEventListener('input', generatePattern);
 lyricsInput.addEventListener('input', generatePattern);
 colorModeSelect.addEventListener('change', generatePattern);
-ditheringCheck.addEventListener('change', generatePattern);
+widthInput.addEventListener('input', generatePattern);
+heightInput.addEventListener('input', generatePattern);
 
-function floydSteinbergDithering(imageData) {
-    const data = imageData.data;
-    const width = imageData.width;
-    const height = imageData.height;
-    
-    for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-            const idx = (y * width + x) * 4;
-            const oldPixel = data[idx];
-            const newPixel = oldPixel < 128 ? 0 : 255;
-            data[idx] = data[idx + 1] = data[idx + 2] = newPixel;
-            
-            const error = oldPixel - newPixel;
-            
-            if (x + 1 < width) {
-                data[((y * width + x + 1) * 4)] += error * 7 / 16;
-            }
-            if (y + 1 < height) {
-                if (x > 0) {
-                    data[(((y + 1) * width + x - 1) * 4)] += error * 3 / 16;
-                }
-                data[(((y + 1) * width + x) * 4)] += error * 5 / 16;
-                if (x + 1 < width) {
-                    data[(((y + 1) * width + x + 1) * 4)] += error * 1 / 16;
-                }
-            }
-        }
-    }
-    
-    return imageData;
-}
 
 function applyContrast(imageData, contrast) {
     const data = imageData.data;
@@ -444,18 +413,19 @@ function generatePattern() {
         const lyricsLines = lyrics.split('\n');
         const lineHeight = 38;  // Increased from 32 for larger text
         
-        // Calculate how many lines can fit with increased padding
+        // Calculate how many lines can fit with padding
         const maxLines = Math.floor((lyricsContainerHeight - 80) / lineHeight);
+        const linesToShow = Math.min(lyricsLines.length, maxLines);
         
-        lyricsLines.slice(0, Math.min(6, maxLines)).forEach((line, index) => {
+        lyricsLines.slice(0, linesToShow).forEach((line, index) => {
             if (line.trim()) {
                 // Highlight current line (middle line)
-                if (index === Math.floor(Math.min(6, maxLines) / 2)) {
+                if (index === Math.floor(linesToShow / 2)) {
                     ctx.fillStyle = '#000';
-                    ctx.font = '600 24px -apple-system, Arial';  // Increased from 18px
+                    ctx.font = '600 24px -apple-system, Arial';
                 } else {
                     ctx.fillStyle = '#666';
-                    ctx.font = '400 24px -apple-system, Arial';  // Increased from 18px
+                    ctx.font = '400 24px -apple-system, Arial';
                 }
                 ctx.fillText(line.trim(), width / 2, lyricsY + index * lineHeight);
             }
@@ -480,13 +450,6 @@ function generatePattern() {
         ctx.putImageData(imageData, 0, 0);
     }
     
-    if (ditheringCheck.checked) {
-        imageData = ctx.getImageData(0, 0, width, height);
-        imageData = floydSteinbergDithering(imageData);
-        ctx.putImageData(imageData, 0, 0);
-    }
-    
-    downloadBtn.disabled = false;
 }
 
 function downloadWallpaper() {
@@ -496,7 +459,6 @@ function downloadWallpaper() {
     link.click();
 }
 
-generateBtn.addEventListener('click', generatePattern);
 downloadBtn.addEventListener('click', downloadWallpaper);
 
 // Language functionality

@@ -142,6 +142,7 @@ input[type="checkbox"] {
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    justify-content: center;
 }
 
 #contrastValue {
@@ -161,7 +162,7 @@ input[type="checkbox"] {
     cursor: pointer;
     transition: all 0.3s ease;
     vertical-align: top;
-    flex: 1;
+    min-width: 200px;
 }
 
 .btn-primary {

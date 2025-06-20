@@ -25,7 +25,6 @@ const languages = {
         grayscale: "Grayscale (E-Ink)",
         color: "Color",
         contrast: "Contrast:",
-        dithering: "Apply Dithering (Recommended for E-Ink)",
 
         // Buttons
         generateWallpaper: "Generate Wallpaper",
@@ -92,7 +91,6 @@ In the silence, hear my voice`
         grayscale: "흑백 (전자잉크용)",
         color: "컬러",
         contrast: "대비:",
-        dithering: "디더링 적용 (전자잉크 권장)",
 
         // Buttons
         generateWallpaper: "배경화면 생성",
@@ -165,15 +163,6 @@ function updateLanguage() {
     updateTextContent('label[for="lyricsInput"]', lang.lyrics);
     updateTextContent('label[for="colorModeSelect"]', lang.colorMode);
     updateTextContent('label[for="contrastSlider"]', lang.contrast);
-    // Update dithering label text while preserving checkbox
-    const ditheringLabel = document.querySelector('label[for="ditheringCheck"]');
-    if (ditheringLabel) {
-        const checkbox = ditheringLabel.querySelector('input[type="checkbox"]');
-        ditheringLabel.innerHTML = '';
-        ditheringLabel.appendChild(checkbox);
-        ditheringLabel.appendChild(document.createTextNode(' ' + lang.dithering));
-    }
-    updateTextContent('#generateBtn', lang.generateWallpaper);
     updateTextContent('#downloadBtn', lang.downloadPng);
 
     // Update form values
