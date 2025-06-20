@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -78,12 +78,25 @@ h1 {
     margin-bottom: 30px;
 }
 
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
 .controls {
     background: white;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
 }
 
 .control-group {
@@ -188,6 +201,12 @@ input[type="checkbox"] {
     cursor: not-allowed;
 }
 
+.preview-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .preview-container {
     background: white;
     padding: 30px;
@@ -223,7 +242,7 @@ input[type="checkbox"] {
     min-height: 90px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .controls {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -237,12 +256,14 @@ input[type="checkbox"] {
     #musicControls {
         grid-column: 1 / -1;
     }
+}
+
+@media (min-width: 1025px) {
+    .controls {
+        display: block;
+    }
     
-    .btn-primary,
-    .btn-secondary {
-        grid-column: span 1;
-        margin: 0;
-        vertical-align: top;
-        align-self: start;
+    .control-group {
+        margin-bottom: 20px;
     }
 }
