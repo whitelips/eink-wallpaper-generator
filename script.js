@@ -83,12 +83,30 @@ let uploadedAlbumArt = null;
 albumArtInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
+        // Check for HEIC format
+        const fileName = file.name.toLowerCase();
+        const fileType = file.type.toLowerCase();
+        const isHEIC = fileName.endsWith('.heic') || fileName.endsWith('.heif') || 
+                      fileType.includes('heic') || fileType.includes('heif');
+        
+        if (isHEIC) {
+            const lang = languages[currentLanguage];
+            alert(lang.heicNotSupported);
+            albumArtInput.value = ''; // Clear the input
+            return;
+        }
+        
         const reader = new FileReader();
         reader.onload = (event) => {
             const img = new Image();
             img.onload = () => {
                 uploadedAlbumArt = img;
                 generatePattern();
+            };
+            img.onerror = () => {
+                const lang = languages[currentLanguage];
+                alert(lang.imageLoadError);
+                albumArtInput.value = ''; // Clear the input
             };
             img.src = event.target.result;
         };
@@ -247,7 +265,28 @@ function generatePattern() {
     
     if (uploadedAlbumArt) {
         ctx.clip();
-        ctx.drawImage(uploadedAlbumArt, albumX, albumY, albumSize, albumSize);
+        
+        // Calculate scale to fill the square (cover behavior)
+        const imgAspectRatio = uploadedAlbumArt.width / uploadedAlbumArt.height;
+        const boxAspectRatio = 1; // Square box
+        
+        let drawWidth, drawHeight, drawX, drawY;
+        
+        if (imgAspectRatio > boxAspectRatio) {
+            // Image is wider - scale by height and crop width
+            drawHeight = albumSize;
+            drawWidth = albumSize * imgAspectRatio;
+            drawX = albumX - (drawWidth - albumSize) / 2; // Center horizontally
+            drawY = albumY;
+        } else {
+            // Image is taller - scale by width and crop height
+            drawWidth = albumSize;
+            drawHeight = albumSize / imgAspectRatio;
+            drawX = albumX;
+            drawY = albumY - (drawHeight - albumSize) / 2; // Center vertically
+        }
+        
+        ctx.drawImage(uploadedAlbumArt, drawX, drawY, drawWidth, drawHeight);
     } else {
         // Gradient placeholder
         const gradient = ctx.createLinearGradient(albumX, albumY, albumX + albumSize, albumY + albumSize);

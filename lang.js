@@ -30,6 +30,10 @@ const languages = {
         // Buttons
         generateWallpaper: "Generate Wallpaper",
         downloadPng: "Download PNG",
+        
+        // Alert messages
+        heicNotSupported: "HEIC/HEIF format is not supported in web browsers. Please convert your image to JPG, PNG, or WebP format and try again.",
+        imageLoadError: "Failed to load the image. Please make sure it's a valid image file (JPG, PNG, WebP, GIF, or SVG).",
 
         // Device groups
         deviceGroups: {
@@ -93,6 +97,10 @@ In the silence, hear my voice`
         // Buttons
         generateWallpaper: "배경화면 생성",
         downloadPng: "PNG 다운로드",
+        
+        // Alert messages
+        heicNotSupported: "HEIC/HEIF 형식은 웹 브라우저에서 지원되지 않습니다. 이미지를 JPG, PNG 또는 WebP 형식으로 변환한 후 다시 시도해주세요.",
+        imageLoadError: "이미지를 불러올 수 없습니다. JPG, PNG, WebP, GIF 또는 SVG 형식의 유효한 이미지 파일인지 확인해주세요.",
 
         // Device groups
         deviceGroups: {
