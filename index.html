@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,10 @@
     <meta name="google-adsense-account" content="ca-pub-6433671510568474">
     <link rel="stylesheet" href="styles.css">
     <script src="lang.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6433671510568474" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6433671510568474"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -19,87 +22,74 @@
             </div>
         </div>
         <p class="subtitle">Create music player wallpapers optimized for e-ink displays</p>
-        
+
         <div class="main-content">
             <div class="controls">
-            <div class="control-group">
-                <label for="deviceSelect">Device Preset:</label>
-                <select id="deviceSelect">
-                    <option value="custom">Custom Size</option>
-                    <optgroup label="Onyx Boox" data-original-label="Onyx Boox">
-                        <option value="boox-poke6">Boox Poke3/4/5/6 (1072×1448)</option>
-                        <option value="boox-palma">Boox Palma/P6/Palma2 (824×1648)</option>
-                        <option value="boox-leaf3">Boox Leaf3/Page/Leaf5/Go7 (1200×1600)</option>
-                        <option value="boox-note-air3">Boox Note Air3 (1404×1872)</option>
-                        <option value="boox-note-max">Boox Note Max (1404×1872)</option>
-                        <option value="boox-max-lumi2">Boox Max Lumi2 (1650×2200)</option>
-                    </optgroup>
-                    <optgroup label="reMarkable" data-original-label="reMarkable">
-                        <option value="remarkable2">reMarkable 1/2 (1404×1872)</option>
-                        <option value="remarkable-paper-pro">reMarkable Paper Pro (1620×2160)</option>
-                    </optgroup>
-                    <optgroup label="Amazon Kindle" data-original-label="Amazon Kindle">
-                        <option value="kindle-paperwhite">Kindle Paperwhite (1072×1448)</option>
-                        <option value="kindle-oasis">Kindle Oasis (1264×1680)</option>
-                        <option value="kindle-scribe">Kindle Scribe (1860×2480)</option>
-                        <option value="kindle-basic">Kindle Basic (800×1112)</option>
-                    </optgroup>
-                    <optgroup label="Kobo" data-original-label="Kobo">
-                        <option value="kobo-clara">Kobo Clara HD/2E (1072×1448)</option>
-                        <option value="kobo-libra">Kobo Libra 2 (1264×1680)</option>
-                        <option value="kobo-sage">Kobo Sage (1440×1920)</option>
-                        <option value="kobo-elipsa">Kobo Elipsa (1404×1872)</option>
-                    </optgroup>
-                    <optgroup label="Crema" data-original-label="Crema">
-                        <option value="crema-a">Crema A (1072×1448)</option>
-                        <option value="crema-c">Crema C (1200×1600)</option>
-                        <option value="crema-palette">Crema Palette (1404×1872)</option>
-                    </optgroup>
-                    <optgroup label="Innospaceone" data-original-label="Innospaceone">
-                        <option value="luna-x2">Luna X/X2 (1404×1872)</option>
-                        <option value="mars">MARS (1200×1600)</option>
-                        <option value="mars10">MARS10 (1650×2200)</option>
-                        <option value="jigu">JIGU (1072×1448)</option>
-                    </optgroup>
-                    <optgroup label="Supernote" data-original-label="Supernote">
-                        <option value="supernote-a5x">Supernote A5X (1404×1872)</option>
-                        <option value="supernote-a6x">Supernote A6X (1080×1440)</option>
-                        <option value="supernote-nomad">Supernote Nomad (1404×1872)</option>
-                        <option value="supernote-manta">Supernote Manta (1200×1600)</option>
-                    </optgroup>
-                    <optgroup label="Hisense" data-original-label="Hisense">
-                        <option value="hisense-a5">Hisense A5 (720×1280)</option>
-                        <option value="hisense-a7">Hisense A7 (1080×1920)</option>
-                        <option value="hisense-a9">Hisense A9 (1200×1600)</option>
-                    </optgroup>
-                    <optgroup label="Other Devices" data-original-label="Other Devices">
-                        <option value="pocketbook-era">PocketBook Era (1200×1600)</option>
-                        <option value="pocketbook-inkpad">PocketBook InkPad (1404×1872)</option>
-                    </optgroup>
-                </select>
-            </div>
-            
-            <div class="control-group" id="customSizeGroup">
-                <label for="widthInput">Width (px):</label>
-                <input type="number" id="widthInput" value="1072" min="100" max="4000" title="Select 'Custom Size' to edit">
-                
-                <label for="heightInput">Height (px):</label>
-                <input type="number" id="heightInput" value="1448" min="100" max="4000" title="Select 'Custom Size' to edit">
-                <small style="color: #666; display: block; margin-top: 5px;">Select "Custom Size" from device preset to enter custom dimensions</small>
-            </div>
-            
-            <div class="control-group" id="musicControls">
-                <label for="albumArtInput">Album Art:</label>
-                <input type="file" id="albumArtInput" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" title="Supported formats: JPG, PNG, WebP, GIF, SVG (HEIC not supported)">
-                
-                <label for="artistInput">Artist:</label>
-                <input type="text" id="artistInput" placeholder="Artist name" value="The Digital Band">
-                
-                <label for="titleInput">Title:</label>
-                <input type="text" id="titleInput" placeholder="Song title" value="Morning Coffee">
-                
-                <label for="lyricsInput">Lyrics (optional):</label>
-                <textarea id="lyricsInput" rows="4" placeholder="Enter lyrics...">Steam rises from my favorite cup
+                <div class="control-group">
+                    <label for="deviceSelect">Device Preset:</label>
+                    <select id="deviceSelect">
+                        <option value="custom">Custom Size</option>
+                        <optgroup label="Onyx Boox" data-original-label="Onyx Boox">
+                            <option value="boox-poke6">Boox Poke3/4/5/6 (1072×1448)</option>
+                            <option value="boox-palma">Boox Palma/P6/Palma2 (824×1648)</option>
+                            <option value="boox-page">Boox Leaf2/3/5/Page/Go7 (1264×1680)</option>
+                            <option value="boox-note-air">Boox Note Air/2/3 (1404×1872)</option>
+                            <option value="boox-note-tab">Boox Tab Ultra/C/Mini C (1404×1872)</option>
+                            <option value="boox-note-lumi-tabx">Boox Note Lumi/2/Tab X (1650×2200)</option>
+                            <option value="boox-note-air4c">Boox Note Air4 C (1860×2480)</option>
+                            <option value="boox-note-max-tabxc">Boox Note Max/Tab X C (2400×3200)</option>
+                        </optgroup>
+                        <optgroup label="reMarkable" data-original-label="reMarkable">
+                            <option value="remarkable2">reMarkable 1/2 (1404×1872)</option>
+                            <option value="remarkable-paper-pro">reMarkable Paper Pro (1620×2160)</option>
+                        </optgroup>
+                        <optgroup label="Crema" data-original-label="Crema">
+                            <option value="crema-a">Crema A (1072×1448)</option>
+                            <option value="crema-c">Crema C/Palette (1264×1680)</option>
+                        </optgroup>
+                        <optgroup label="Innospaceone" data-original-label="Innospaceone">
+                            <option value="luna-x2">Luna X/X2 (1072×1448)</option>
+                            <option value="mars7-jigo">MARS/JIGU (1264×1680)</option>
+                            <option value="mars10">MARS10 (1200×1600)</option>
+                        </optgroup>
+                        <optgroup label="Supernote" data-original-label="Supernote">
+                            <option value="supernote-a5x-a6x-nomad">Supernote A5X/A6X/Nomad (1404×1872)</option>
+                            <option value="supernote-manta">Supernote Manta (1920×2560)</option>
+                        </optgroup>
+                        <optgroup label="Hisense" data-original-label="Hisense">
+                            <option value="hisense-a5">Hisense A5 (720×1440)</option>
+                            <option value="hisense-a7">Hisense A7 (900×1800)</option>
+                            <option value="hisense-a9">Hisense A9 (824×1648)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="control-group" id="customSizeGroup">
+                    <label for="widthInput">Width (px):</label>
+                    <input type="number" id="widthInput" value="1072" min="100" max="4000"
+                        title="Select 'Custom Size' to edit">
+
+                    <label for="heightInput">Height (px):</label>
+                    <input type="number" id="heightInput" value="1448" min="100" max="4000"
+                        title="Select 'Custom Size' to edit">
+                    <small style="color: #666; display: block; margin-top: 5px;">Select "Custom Size" from device preset
+                        to enter custom dimensions</small>
+                </div>
+
+                <div class="control-group" id="musicControls">
+                    <label for="albumArtInput">Album Art:</label>
+                    <input type="file" id="albumArtInput"
+                        accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml"
+                        title="Supported formats: JPG, PNG, WebP, GIF, SVG (HEIC not supported)">
+
+                    <label for="artistInput">Artist:</label>
+                    <input type="text" id="artistInput" placeholder="Artist name" value="The Digital Band">
+
+                    <label for="titleInput">Title:</label>
+                    <input type="text" id="titleInput" placeholder="Song title" value="Morning Coffee">
+
+                    <label for="lyricsInput">Lyrics (optional):</label>
+                    <textarea id="lyricsInput" rows="4" placeholder="Enter lyrics...">Steam rises from my favorite cup
 Another day is starting up
 The world is quiet, streets are still
 Coffee warming up my soul
@@ -113,45 +103,42 @@ Coffee brewing, heart is new
 Every morning starts with you
 Simple pleasures, simple joys
 In the silence, hear my voice</textarea>
+                </div>
+
+                <div class="control-group">
+                    <label for="colorModeSelect">Color Mode:</label>
+                    <select id="colorModeSelect">
+                        <option value="grayscale">Grayscale (E-Ink)</option>
+                        <option value="color">Color</option>
+                    </select>
+                </div>
+
+
+
             </div>
-            
-            <div class="control-group">
-                <label for="colorModeSelect">Color Mode:</label>
-                <select id="colorModeSelect">
-                    <option value="grayscale">Grayscale (E-Ink)</option>
-                    <option value="color">Color</option>
-                </select>
-            </div>
-            
-            
-            
-            </div>
-            
+
             <div class="preview-section">
                 <div class="preview-container">
                     <canvas id="previewCanvas"></canvas>
                 </div>
-                
+
                 <div class="button-group">
                     <button id="downloadBtn" class="btn-primary">Download PNG</button>
                 </div>
             </div>
         </div>
-        
+
         <!-- AdSense Ad Unit -->
         <div class="ad-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6433671510568474"
-                 data-ad-slot="auto"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6433671510568474" data-ad-slot="auto"
+                data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
+                (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
+
 </html>

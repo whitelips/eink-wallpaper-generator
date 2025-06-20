@@ -37,13 +37,10 @@ const languages = {
         deviceGroups: {
             "Onyx Boox": "Onyx Boox",
             "reMarkable": "reMarkable",
-            "Amazon Kindle": "Amazon Kindle",
-            "Kobo": "Kobo",
             "Crema": "Crema",
             "Innospaceone": "Innospaceone",
             "Supernote": "Supernote",
-            "Hisense": "Hisense",
-            "Other Devices": "Other Devices"
+            "Hisense": "Hisense"
         },
 
         // Default content
@@ -102,13 +99,10 @@ In the silence, hear my voice`
         deviceGroups: {
             "Onyx Boox": "오닉스 북스",
             "reMarkable": "리마커블",
-            "Amazon Kindle": "아마존 킨들",
-            "Kobo": "코보",
             "Crema": "크레마",
             "Innospaceone": "이노스페이스원",
             "Supernote": "슈퍼노트",
-            "Hisense": "하이센스",
-            "Other Devices": "기타 기기"
+            "Hisense": "하이센스"
         },
 
         // Default content
