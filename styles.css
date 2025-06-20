@@ -17,10 +17,59 @@ body {
     padding: 20px;
 }
 
-h1 {
-    text-align: center;
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
+    position: relative;
+}
+
+h1 {
+    margin: 0;
     color: #222;
+    text-align: center;
+}
+
+.language-switcher {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    right: 0;
+}
+
+.lang-btn {
+    padding: 6px 12px;
+    border: 2px solid #ddd;
+    background: white;
+    color: #666;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    border-color: #333;
+    color: #333;
+}
+
+.lang-btn.active {
+    background: #333;
+    color: white;
+    border-color: #333;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    h1 {
+        text-align: center;
+    }
 }
 
 .subtitle {

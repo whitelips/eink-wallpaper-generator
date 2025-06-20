@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Ink Music Player Wallpaper</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="lang.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>E-Ink Music Player Wallpaper</h1>
+        <div class="header">
+            <h1>E-Ink Music Player Wallpaper</h1>
+            <div class="language-switcher">
+                <button onclick="switchLanguage('en')" class="lang-btn" id="lang-en">EN</button>
+                <button onclick="switchLanguage('ko')" class="lang-btn" id="lang-ko">한국어</button>
+            </div>
+        </div>
         <p class="subtitle">Create music player wallpapers optimized for e-ink displays</p>
         
         <div class="controls">
@@ -16,7 +23,7 @@
                 <label for="deviceSelect">Device Preset:</label>
                 <select id="deviceSelect">
                     <option value="custom">Custom Size</option>
-                    <optgroup label="Onyx Boox">
+                    <optgroup label="Onyx Boox" data-original-label="Onyx Boox">
                         <option value="boox-poke6">Boox Poke3/4/5/6 (1072×1448)</option>
                         <option value="boox-palma">Boox Palma/P6/Palma2 (824×1648)</option>
                         <option value="boox-leaf3">Boox Leaf3/Page/Leaf5/Go7 (1200×1600)</option>
@@ -24,45 +31,45 @@
                         <option value="boox-note-max">Boox Note Max (1404×1872)</option>
                         <option value="boox-max-lumi2">Boox Max Lumi2 (1650×2200)</option>
                     </optgroup>
-                    <optgroup label="reMarkable">
+                    <optgroup label="reMarkable" data-original-label="reMarkable">
                         <option value="remarkable2">reMarkable 1/2 (1404×1872)</option>
                         <option value="remarkable-paper-pro">reMarkable Paper Pro (1620×2160)</option>
                     </optgroup>
-                    <optgroup label="Amazon Kindle">
+                    <optgroup label="Amazon Kindle" data-original-label="Amazon Kindle">
                         <option value="kindle-paperwhite">Kindle Paperwhite (1072×1448)</option>
                         <option value="kindle-oasis">Kindle Oasis (1264×1680)</option>
                         <option value="kindle-scribe">Kindle Scribe (1860×2480)</option>
                         <option value="kindle-basic">Kindle Basic (800×1112)</option>
                     </optgroup>
-                    <optgroup label="Kobo">
+                    <optgroup label="Kobo" data-original-label="Kobo">
                         <option value="kobo-clara">Kobo Clara HD/2E (1072×1448)</option>
                         <option value="kobo-libra">Kobo Libra 2 (1264×1680)</option>
                         <option value="kobo-sage">Kobo Sage (1440×1920)</option>
                         <option value="kobo-elipsa">Kobo Elipsa (1404×1872)</option>
                     </optgroup>
-                    <optgroup label="Crema">
+                    <optgroup label="Crema" data-original-label="Crema">
                         <option value="crema-a">Crema A (1072×1448)</option>
                         <option value="crema-c">Crema C (1200×1600)</option>
                         <option value="crema-palette">Crema Palette (1404×1872)</option>
                     </optgroup>
-                    <optgroup label="Innospaceone">
+                    <optgroup label="Innospaceone" data-original-label="Innospaceone">
                         <option value="luna-x2">Luna X/X2 (1404×1872)</option>
                         <option value="mars">MARS (1200×1600)</option>
                         <option value="mars10">MARS10 (1650×2200)</option>
                         <option value="jigu">JIGU (1072×1448)</option>
                     </optgroup>
-                    <optgroup label="Supernote">
+                    <optgroup label="Supernote" data-original-label="Supernote">
                         <option value="supernote-a5x">Supernote A5X (1404×1872)</option>
                         <option value="supernote-a6x">Supernote A6X (1080×1440)</option>
                         <option value="supernote-nomad">Supernote Nomad (1404×1872)</option>
                         <option value="supernote-manta">Supernote Manta (1200×1600)</option>
                     </optgroup>
-                    <optgroup label="Hisense">
+                    <optgroup label="Hisense" data-original-label="Hisense">
                         <option value="hisense-a5">Hisense A5 (720×1280)</option>
                         <option value="hisense-a7">Hisense A7 (1080×1920)</option>
                         <option value="hisense-a9">Hisense A9 (1200×1600)</option>
                     </optgroup>
-                    <optgroup label="Other Devices">
+                    <optgroup label="Other Devices" data-original-label="Other Devices">
                         <option value="pocketbook-era">PocketBook Era (1200×1600)</option>
                         <option value="pocketbook-inkpad">PocketBook InkPad (1404×1872)</option>
                     </optgroup>

@@ -88,6 +88,7 @@ albumArtInput.addEventListener('change', (e) => {
             const img = new Image();
             img.onload = () => {
                 uploadedAlbumArt = img;
+                generatePattern();
             };
             img.src = event.target.result;
         };
@@ -98,7 +99,15 @@ albumArtInput.addEventListener('change', (e) => {
 
 contrastSlider.addEventListener('input', (e) => {
     contrastValue.textContent = e.target.value + '%';
+    generatePattern();
 });
+
+// Real-time updates for all form inputs
+artistInput.addEventListener('input', generatePattern);
+titleInput.addEventListener('input', generatePattern);
+lyricsInput.addEventListener('input', generatePattern);
+colorModeSelect.addEventListener('change', generatePattern);
+ditheringCheck.addEventListener('change', generatePattern);
 
 function floydSteinbergDithering(imageData) {
     const data = imageData.data;
@@ -451,8 +460,49 @@ function downloadWallpaper() {
 generateBtn.addEventListener('click', generatePattern);
 downloadBtn.addEventListener('click', downloadWallpaper);
 
-// Initialize with Boox Poke6 preset
-deviceSelect.value = 'boox-poke6';
-deviceSelect.dispatchEvent(new Event('change'));
+// Language functionality
+function updateLanguageButtons() {
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    const activeBtn = document.getElementById(`lang-${currentLanguage}`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
+}
 
-generatePattern();
+// Override the switchLanguage function to update buttons
+const originalSwitchLanguage = window.switchLanguage;
+window.switchLanguage = function(newLang) {
+    originalSwitchLanguage(newLang);
+    updateLanguageButtons();
+};
+
+// Initialize language and UI
+document.addEventListener('DOMContentLoaded', function() {
+    loadPreferredLanguage();
+    updateLanguageButtons();
+    
+    // Initialize with Boox Poke6 preset
+    deviceSelect.value = 'boox-poke6';
+    deviceSelect.dispatchEvent(new Event('change'));
+    
+    generatePattern();
+});
+
+// For immediate execution if DOM is already loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        loadPreferredLanguage();
+        updateLanguageButtons();
+    });
+} else {
+    loadPreferredLanguage();
+    updateLanguageButtons();
+    
+    // Initialize with Boox Poke6 preset
+    deviceSelect.value = 'boox-poke6';
+    deviceSelect.dispatchEvent(new Event('change'));
+    
+    generatePattern();
+}
