@@ -1,0 +1,458 @@
+const canvas = document.getElementById('previewCanvas');
+const ctx = canvas.getContext('2d');
+
+const deviceSelect = document.getElementById('deviceSelect');
+const widthInput = document.getElementById('widthInput');
+const heightInput = document.getElementById('heightInput');
+const contrastSlider = document.getElementById('contrastSlider');
+const contrastValue = document.getElementById('contrastValue');
+const ditheringCheck = document.getElementById('ditheringCheck');
+const generateBtn = document.getElementById('generateBtn');
+const downloadBtn = document.getElementById('downloadBtn');
+
+const devicePresets = {
+    // Amazon Kindle
+    'kindle-paperwhite': { width: 1072, height: 1448 },
+    'kindle-oasis': { width: 1264, height: 1680 },
+    'kindle-scribe': { width: 1860, height: 2480 },
+    'kindle-basic': { width: 800, height: 1112 },
+    // Kobo
+    'kobo-clara': { width: 1072, height: 1448 },
+    'kobo-libra': { width: 1264, height: 1680 },
+    'kobo-sage': { width: 1440, height: 1920 },
+    'kobo-elipsa': { width: 1404, height: 1872 },
+    // Onyx Boox
+    'boox-poke6': { width: 1072, height: 1448 },
+    'boox-palma': { width: 824, height: 1648 },
+    'boox-leaf3': { width: 1200, height: 1600 },
+    'boox-note-air3': { width: 1404, height: 1872 },
+    'boox-note-max': { width: 1404, height: 1872 },
+    'boox-max-lumi2': { width: 1650, height: 2200 },
+    // reMarkable
+    'remarkable2': { width: 1404, height: 1872 },
+    'remarkable-paper-pro': { width: 1620, height: 2160 },
+    // Crema devices
+    'crema-a': { width: 1072, height: 1448 },
+    'crema-c': { width: 1200, height: 1600 },
+    'crema-palette': { width: 1404, height: 1872 },
+    // Innospaceone devices
+    'luna-x2': { width: 1404, height: 1872 },
+    'mars': { width: 1200, height: 1600 },
+    'mars10': { width: 1650, height: 2200 },
+    'jigu': { width: 1072, height: 1448 },
+    // Supernote devices
+    'supernote-a5x': { width: 1404, height: 1872 },
+    'supernote-a6x': { width: 1080, height: 1440 },
+    'supernote-nomad': { width: 1404, height: 1872 },
+    'supernote-manta': { width: 1200, height: 1600 },
+    // Hisense devices
+    'hisense-a5': { width: 720, height: 1280 },
+    'hisense-a7': { width: 1080, height: 1920 },
+    'hisense-a9': { width: 1200, height: 1600 },
+    // Other devices
+    'pocketbook-era': { width: 1200, height: 1600 },
+    'pocketbook-inkpad': { width: 1404, height: 1872 }
+};
+
+const customSizeGroup = document.getElementById('customSizeGroup');
+
+deviceSelect.addEventListener('change', (e) => {
+    const preset = devicePresets[e.target.value];
+    if (preset) {
+        widthInput.value = preset.width;
+        heightInput.value = preset.height;
+        customSizeGroup.style.opacity = '0.6';
+        widthInput.disabled = true;
+        heightInput.disabled = true;
+    } else {
+        customSizeGroup.style.opacity = '1';
+        widthInput.disabled = false;
+        heightInput.disabled = false;
+    }
+});
+
+const musicControls = document.getElementById('musicControls');
+const albumArtInput = document.getElementById('albumArtInput');
+const artistInput = document.getElementById('artistInput');
+const titleInput = document.getElementById('titleInput');
+const lyricsInput = document.getElementById('lyricsInput');
+const colorModeSelect = document.getElementById('colorModeSelect');
+
+let uploadedAlbumArt = null;
+
+albumArtInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                uploadedAlbumArt = img;
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+
+contrastSlider.addEventListener('input', (e) => {
+    contrastValue.textContent = e.target.value + '%';
+});
+
+function floydSteinbergDithering(imageData) {
+    const data = imageData.data;
+    const width = imageData.width;
+    const height = imageData.height;
+    
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const idx = (y * width + x) * 4;
+            const oldPixel = data[idx];
+            const newPixel = oldPixel < 128 ? 0 : 255;
+            data[idx] = data[idx + 1] = data[idx + 2] = newPixel;
+            
+            const error = oldPixel - newPixel;
+            
+            if (x + 1 < width) {
+                data[((y * width + x + 1) * 4)] += error * 7 / 16;
+            }
+            if (y + 1 < height) {
+                if (x > 0) {
+                    data[(((y + 1) * width + x - 1) * 4)] += error * 3 / 16;
+                }
+                data[(((y + 1) * width + x) * 4)] += error * 5 / 16;
+                if (x + 1 < width) {
+                    data[(((y + 1) * width + x + 1) * 4)] += error * 1 / 16;
+                }
+            }
+        }
+    }
+    
+    return imageData;
+}
+
+function applyContrast(imageData, contrast) {
+    const data = imageData.data;
+    const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+    
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] = factor * (data[i] - 128) + 128;
+        data[i + 1] = factor * (data[i + 1] - 128) + 128;
+        data[i + 2] = factor * (data[i + 2] - 128) + 128;
+    }
+    
+    return imageData;
+}
+
+
+function generatePattern() {
+    const width = parseInt(widthInput.value);
+    const height = parseInt(heightInput.value);
+    const contrast = parseInt(contrastSlider.value) - 100;
+    
+    canvas.width = width;
+    canvas.height = height;
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
+    
+    // Music Player Pattern - Apple Music Style
+    const artist = artistInput.value || 'Artist Name';
+    const title = titleInput.value || 'Song Title';
+    const lyrics = lyricsInput.value || '';
+    
+    // Album art with rounded corners and shadow effect
+    const albumSize = Math.min(width, height) * 0.35;
+    const vinylSize = albumSize * 0.95;  // Slightly smaller than album
+    const vinylOffsetX = albumSize * 0.6;  // How far vinyl slides out
+    
+    // Calculate total width of album + visible vinyl portion
+    const totalWidth = albumSize + vinylOffsetX;
+    const setX = (width - totalWidth) / 2;  // Center the entire set
+    const albumX = setX;
+    const albumY = height * 0.08;
+    const cornerRadius = 12;
+    
+    // Draw vinyl record first (behind the album cover)
+    const vinylX = albumX + vinylOffsetX;
+    const vinylY = albumY + (albumSize - vinylSize) / 2;  // Center vertically
+    const vinylCenterX = vinylX + vinylSize / 2;
+    const vinylCenterY = vinylY + vinylSize / 2;
+    
+    // Vinyl record shadow
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+    ctx.shadowBlur = 15;
+    ctx.shadowOffsetX = 5;
+    ctx.shadowOffsetY = 5;
+    
+    // Main vinyl disc - dark gray/black
+    ctx.beginPath();
+    ctx.arc(vinylCenterX, vinylCenterY, vinylSize / 2, 0, Math.PI * 2);
+    ctx.fillStyle = '#1a1a1a';
+    ctx.fill();
+    ctx.restore();
+    
+    // Vinyl grooves (concentric circles)
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 1;
+    for (let i = 1; i <= 8; i++) {
+        ctx.beginPath();
+        ctx.arc(vinylCenterX, vinylCenterY, (vinylSize / 2) * (i / 10), 0, Math.PI * 2);
+        ctx.stroke();
+    }
+    
+    // Center label
+    const labelRadius = vinylSize * 0.15;
+    ctx.beginPath();
+    ctx.arc(vinylCenterX, vinylCenterY, labelRadius, 0, Math.PI * 2);
+    ctx.fillStyle = '#8B0000';  // Dark red label
+    ctx.fill();
+    
+    // Center hole
+    ctx.beginPath();
+    ctx.arc(vinylCenterX, vinylCenterY, vinylSize * 0.025, 0, Math.PI * 2);
+    ctx.fillStyle = '#000';
+    ctx.fill();
+    
+    
+    // Now draw album art on top (this will cover part of the vinyl)
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
+    ctx.shadowBlur = 20;
+    ctx.shadowOffsetY = 10;
+    
+    // Rounded rectangle for album art
+    ctx.beginPath();
+    ctx.moveTo(albumX + cornerRadius, albumY);
+    ctx.lineTo(albumX + albumSize - cornerRadius, albumY);
+    ctx.quadraticCurveTo(albumX + albumSize, albumY, albumX + albumSize, albumY + cornerRadius);
+    ctx.lineTo(albumX + albumSize, albumY + albumSize - cornerRadius);
+    ctx.quadraticCurveTo(albumX + albumSize, albumY + albumSize, albumX + albumSize - cornerRadius, albumY + albumSize);
+    ctx.lineTo(albumX + cornerRadius, albumY + albumSize);
+    ctx.quadraticCurveTo(albumX, albumY + albumSize, albumX, albumY + albumSize - cornerRadius);
+    ctx.lineTo(albumX, albumY + cornerRadius);
+    ctx.quadraticCurveTo(albumX, albumY, albumX + cornerRadius, albumY);
+    ctx.closePath();
+    
+    if (uploadedAlbumArt) {
+        ctx.clip();
+        ctx.drawImage(uploadedAlbumArt, albumX, albumY, albumSize, albumSize);
+    } else {
+        // Gradient placeholder
+        const gradient = ctx.createLinearGradient(albumX, albumY, albumX + albumSize, albumY + albumSize);
+        gradient.addColorStop(0, '#f5f5f5');
+        gradient.addColorStop(1, '#e0e0e0');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Music note icon
+        ctx.fillStyle = '#999';
+        ctx.font = '48px -apple-system, Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('♫', albumX + albumSize / 2, albumY + albumSize / 2);
+    }
+    ctx.restore();
+    
+    // Title and Artist with Apple Music typography - increased spacing
+    const titleY = albumY + albumSize + 80;  // Increased from 50
+    
+    // Calculate responsive font sizes
+    const baseFontSize = Math.min(width, height) / 40;
+    const titleFontSize = baseFontSize * 1.8;
+    const artistFontSize = baseFontSize * 1.3;
+    
+    // Title - larger, bold
+    ctx.fillStyle = '#000';
+    ctx.font = `600 ${titleFontSize}px -apple-system, Arial`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    
+    // Truncate title if too long
+    const maxTitleWidth = width * 0.85;
+    let displayTitle = title;
+    if (ctx.measureText(title).width > maxTitleWidth) {
+        while (ctx.measureText(displayTitle + '...').width > maxTitleWidth && displayTitle.length > 0) {
+            displayTitle = displayTitle.slice(0, -1);
+        }
+        displayTitle += '...';
+    }
+    ctx.fillText(displayTitle, width / 2, titleY);
+    
+    // Artist - smaller, regular weight, gray - increased spacing
+    ctx.fillStyle = '#666';
+    ctx.font = `400 ${artistFontSize}px -apple-system, Arial`;
+    ctx.fillText(artist, width / 2, titleY + titleFontSize + 25);  // Increased from 15
+    
+    // Progress bar - Apple Music style - increased spacing
+    const progressY = titleY + titleFontSize + artistFontSize + 80;  // Increased spacing
+    const barWidth = width * 0.5;  // Reduced width to leave more space for larger time labels
+    const barX = (width - barWidth) / 2;
+    const barHeight = 8;  // Increased from 4px for better visibility
+    
+    // Time labels - larger font size, positioned outside the progress bar
+    ctx.fillStyle = '#999';
+    ctx.font = '400 18px -apple-system, Arial';  // Increased from 13px
+    ctx.textBaseline = 'middle';  // Center text vertically
+    ctx.textAlign = 'right';
+    ctx.fillText('1:03', barX - 20, progressY + barHeight / 2);  // Left side, centered with progress bar
+    ctx.textAlign = 'left';
+    ctx.fillText('2:07', barX + barWidth + 20, progressY + barHeight / 2);  // Right side, centered with progress bar
+    
+    // Progress bar background - rounded corners
+    ctx.fillStyle = '#e5e5e5';
+    ctx.beginPath();
+    ctx.roundRect(barX, progressY, barWidth, barHeight, barHeight / 2);
+    ctx.fill();
+    
+    // Progress bar foreground - filled portion with rounded corners
+    const progress = 0.5; // 50% progress
+    const filledWidth = barWidth * progress;
+    ctx.fillStyle = '#333';
+    ctx.beginPath();
+    ctx.roundRect(barX, progressY, filledWidth, barHeight, barHeight / 2);
+    ctx.fill();
+    
+    // Playback controls - Apple Music style - increased spacing
+    const controlsY = progressY + 90;  // Increased from 60
+    const controlSpacing = 240;  // Doubled from 120
+    const controlsX = width / 2;
+    
+    // Previous track (skip backward)
+    ctx.fillStyle = '#000';
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 6;  // Increased thickness
+    
+    // Skip backward icon - reduced height
+    const skipSize = 24;  // Reduced height from 36
+    const skipGap = 12;   // Gap between triangles
+    
+    // First triangle (left)
+    ctx.beginPath();
+    ctx.moveTo(controlsX - controlSpacing + skipSize/2 - skipGap/2, controlsY - skipSize);
+    ctx.lineTo(controlsX - controlSpacing - skipSize/2 - skipGap/2, controlsY);
+    ctx.lineTo(controlsX - controlSpacing + skipSize/2 - skipGap/2, controlsY + skipSize);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Second triangle (right)
+    ctx.beginPath();
+    ctx.moveTo(controlsX - controlSpacing + skipSize + skipGap/2, controlsY - skipSize);
+    ctx.lineTo(controlsX - controlSpacing + skipGap/2, controlsY);
+    ctx.lineTo(controlsX - controlSpacing + skipSize + skipGap/2, controlsY + skipSize);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Pause button - reduced height
+    const pauseSize = 28;  // Reduced height from 40
+    const pauseBarWidth = 14;  // Keep width the same
+    const pauseGap = 16;  // Keep gap the same
+    
+    ctx.fillRect(controlsX - pauseGap/2 - pauseBarWidth, controlsY - pauseSize, pauseBarWidth, pauseSize * 2);
+    ctx.fillRect(controlsX + pauseGap/2, controlsY - pauseSize, pauseBarWidth, pauseSize * 2);
+    
+    // Skip forward icon - reduced height
+    // First triangle (left)
+    ctx.beginPath();
+    ctx.moveTo(controlsX + controlSpacing - skipSize - skipGap/2, controlsY - skipSize);
+    ctx.lineTo(controlsX + controlSpacing - skipGap/2, controlsY);
+    ctx.lineTo(controlsX + controlSpacing - skipSize - skipGap/2, controlsY + skipSize);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Second triangle (right)
+    ctx.beginPath();
+    ctx.moveTo(controlsX + controlSpacing - skipSize/2 + skipGap/2, controlsY - skipSize);
+    ctx.lineTo(controlsX + controlSpacing + skipSize/2 + skipGap/2, controlsY);
+    ctx.lineTo(controlsX + controlSpacing - skipSize/2 + skipGap/2, controlsY + skipSize);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Lyrics section - Apple Music style - increased spacing
+    if (lyrics) {
+        const lyricsY = controlsY + 110;  // Increased from 80
+        
+        // Lyrics container with subtle background and rounded corners
+        const lyricsContainerY = lyricsY - 40;  // Increased padding
+        const lyricsContainerHeight = height - lyricsContainerY - 60;  // Increased padding
+        const lyricsContainerX = width * 0.08;  // More space on sides
+        const lyricsContainerWidth = width * 0.84;  // Wider container
+        const cornerRadius = 16;  // Rounded corners
+        
+        // Subtle background for lyrics area with rounded corners
+        ctx.fillStyle = '#fafafa';
+        ctx.beginPath();
+        ctx.roundRect(lyricsContainerX, lyricsContainerY, lyricsContainerWidth, lyricsContainerHeight, cornerRadius);
+        ctx.fill();
+        
+        // Lyrics text - increased font size
+        ctx.font = '400 24px -apple-system, Arial';  // Increased from 18px
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillStyle = '#333';
+        
+        const lyricsLines = lyrics.split('\n');
+        const lineHeight = 38;  // Increased from 32 for larger text
+        
+        // Calculate how many lines can fit with increased padding
+        const maxLines = Math.floor((lyricsContainerHeight - 80) / lineHeight);
+        
+        lyricsLines.slice(0, Math.min(6, maxLines)).forEach((line, index) => {
+            if (line.trim()) {
+                // Highlight current line (middle line)
+                if (index === Math.floor(Math.min(6, maxLines) / 2)) {
+                    ctx.fillStyle = '#000';
+                    ctx.font = '600 24px -apple-system, Arial';  // Increased from 18px
+                } else {
+                    ctx.fillStyle = '#666';
+                    ctx.font = '400 24px -apple-system, Arial';  // Increased from 18px
+                }
+                ctx.fillText(line.trim(), width / 2, lyricsY + index * lineHeight);
+            }
+        });
+    }
+    
+    let imageData = ctx.getImageData(0, 0, width, height);
+    
+    // Apply grayscale if selected
+    if (colorModeSelect.value === 'grayscale') {
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+            const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+            data[i] = data[i + 1] = data[i + 2] = gray;
+        }
+        ctx.putImageData(imageData, 0, 0);
+    }
+    
+    if (contrast !== 0) {
+        imageData = ctx.getImageData(0, 0, width, height);
+        imageData = applyContrast(imageData, contrast);
+        ctx.putImageData(imageData, 0, 0);
+    }
+    
+    if (ditheringCheck.checked) {
+        imageData = ctx.getImageData(0, 0, width, height);
+        imageData = floydSteinbergDithering(imageData);
+        ctx.putImageData(imageData, 0, 0);
+    }
+    
+    downloadBtn.disabled = false;
+}
+
+function downloadWallpaper() {
+    const link = document.createElement('a');
+    link.download = `eink-wallpaper-${Date.now()}.png`;
+    link.href = canvas.toDataURL();
+    link.click();
+}
+
+generateBtn.addEventListener('click', generatePattern);
+downloadBtn.addEventListener('click', downloadWallpaper);
+
+// Initialize with Boox Poke6 preset
+deviceSelect.value = 'boox-poke6';
+deviceSelect.dispatchEvent(new Event('change'));
+
+generatePattern();
