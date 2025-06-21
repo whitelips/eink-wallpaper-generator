@@ -30,6 +30,38 @@
         <main class="changelog-content">
             <section class="changelog-section">
                 <div class="version-entry">
+                    <h2>Version 1.6.0 <span class="date">2025-06-21</span></h2>
+                    <div class="changes">
+                        <h3 id="proportional-scaling">⚖️ 비례 크기 조정 시스템</h3>
+                        <ul>
+                            <li id="change-scaling-system">모든 구성 요소에 대한 비례 크기 조정 시스템 구현</li>
+                            <li id="change-linear-interpolation">최소/최대 크기 간 선형 보간 적용</li>
+                            <li id="change-height-based">기기 높이 기반 크기 조정 (1440px ~ 3200px)</li>
+                            <li id="change-scale-range">1.0x ~ 2.0x 비례 크기 조정 범위</li>
+                            <li id="change-font-caps">제목 최대 180px, 아티스트 최대 130px로 제한</li>
+                            <li id="change-smooth-transitions">모든 해상도에서 부드러운 전환 효과</li>
+                        </ul>
+                        
+                        <h3 id="text-improvements">📝 텍스트 가독성 개선</h3>
+                        <ul>
+                            <li id="change-font-increase">모든 텍스트 글꼴 크기 20% 증가</li>
+                            <li id="change-conditional-lyrics">가사: 높이 > 2000px일 때 180% 크기</li>
+                            <li id="change-conditional-time">시간 레이블: 높이 > 1800px일 때 150% 크기</li>
+                            <li id="change-conditional-progress">진행률 표시줄: 높이 > 1800px일 때 180% 높이</li>
+                        </ul>
+                        
+                        <h3 id="documentation">📚 문서화</h3>
+                        <ul>
+                            <li id="change-changelog-page">변경 로그 하위 페이지 추가</li>
+                            <li id="change-bilingual-changelog">한국어/영어 이중 언어 지원</li>
+                            <li id="change-footer-link">홈페이지 하단에 변경 로그 링크 추가</li>
+                            <li id="change-remove-github">GitHub 링크 제거로 간소화</li>
+                            <li id="change-fix-dates">변경 로그 날짜 수정 (6월 2025)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="version-entry">
                     <h2>Version 1.5.0 <span class="date">2025-06-21</span></h2>
                     <div class="changes">
                         <h3 id="terminology-update">🔄 용어 업데이트</h3>
@@ -157,6 +189,28 @@
                 pageTitle: "Changelog - E-Ink Music Player Lockscreen Generator",
                 backToHome: "← Back to Home",
                 
+                // Version 1.6.0
+                proportionalScaling: "⚖️ Proportional Scaling System",
+                changeScalingSystem: "Implemented proportional scaling system for all components",
+                changeLinearInterpolation: "Applied linear interpolation between min/max sizes",
+                changeHeightBased: "Device height-based scaling (1440px ~ 3200px)",
+                changeScaleRange: "1.0x ~ 2.0x proportional scaling range",
+                changeFontCaps: "Title capped at 180px, Artist capped at 130px",
+                changeSmoothTransitions: "Smooth transitions across all resolutions",
+                
+                textImprovements: "📝 Text Readability Improvements",
+                changeFontIncrease: "All text font sizes increased by 20%",
+                changeConditionalLyrics: "Lyrics: 180% size when height > 2000px",
+                changeConditionalTime: "Time labels: 150% size when height > 1800px",
+                changeConditionalProgress: "Progress bar: 180% height when height > 1800px",
+                
+                documentation: "📚 Documentation",
+                changeChangelogPage: "Added changelog subpage",
+                changeBilingualChangelog: "Korean/English bilingual support",
+                changeFooterLink: "Added changelog link to homepage footer",
+                changeRemoveGithub: "Removed GitHub link for simplification",
+                changeFixDates: "Fixed changelog dates (June 2025)",
+                
                 // Version 1.5.0
                 terminologyUpdate: "🔄 Terminology Update",
                 changeWallpaperLockscreen: "Changed all 'wallpaper' terminology to 'lockscreen' (Korean: 배경화면 → 잠금화면)",
@@ -228,6 +282,28 @@
             ko: {
                 pageTitle: "변경 로그 - 전자잉크 음악 플레이어 잠금화면 생성기",
                 backToHome: "← 홈으로 돌아가기",
+                
+                // Version 1.6.0
+                proportionalScaling: "⚖️ 비례 크기 조정 시스템",
+                changeScalingSystem: "모든 구성 요소에 대한 비례 크기 조정 시스템 구현",
+                changeLinearInterpolation: "최소/최대 크기 간 선형 보간 적용",
+                changeHeightBased: "기기 높이 기반 크기 조정 (1440px ~ 3200px)",
+                changeScaleRange: "1.0x ~ 2.0x 비례 크기 조정 범위",
+                changeFontCaps: "제목 최대 180px, 아티스트 최대 130px로 제한",
+                changeSmoothTransitions: "모든 해상도에서 부드러운 전환 효과",
+                
+                textImprovements: "📝 텍스트 가독성 개선",
+                changeFontIncrease: "모든 텍스트 글꼴 크기 20% 증가",
+                changeConditionalLyrics: "가사: 높이 > 2000px일 때 180% 크기",
+                changeConditionalTime: "시간 레이블: 높이 > 1800px일 때 150% 크기",
+                changeConditionalProgress: "진행률 표시줄: 높이 > 1800px일 때 180% 높이",
+                
+                documentation: "📚 문서화",
+                changeChangelogPage: "변경 로그 하위 페이지 추가",
+                changeBilingualChangelog: "한국어/영어 이중 언어 지원",
+                changeFooterLink: "홈페이지 하단에 변경 로그 링크 추가",
+                changeRemoveGithub: "GitHub 링크 제거로 간소화",
+                changeFixDates: "변경 로그 날짜 수정 (6월 2025)",
                 
                 // Version 1.5.0
                 terminologyUpdate: "🔄 용어 업데이트",
