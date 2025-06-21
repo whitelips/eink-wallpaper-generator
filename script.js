@@ -372,15 +372,17 @@ function generatePattern() {
         ctx.roundRect(lyricsContainerX, lyricsContainerY, lyricsContainerWidth, lyricsContainerHeight, cornerRadius);
         ctx.fill();
 
-        // Lyrics text - increased font size by 20%
-        const lyricsFontSize = 24 * 1.2;  // 20% increase from 24px to 28.8px
+        // Lyrics text - increased font size by 20% or 180% for larger displays
+        const lyricsBaseSize = 24;
+        const lyricsFontSize = height > 2000 ? lyricsBaseSize * 1.8 : lyricsBaseSize * 1.2;  // 180% for height > 2000, otherwise 120%
         ctx.font = `400 ${lyricsFontSize}px -apple-system, Arial`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillStyle = '#333';
 
         const lyricsLines = lyrics.split('\n');
-        const lineHeight = 38 * 1.2;  // 20% increase for line height as well
+        const lineHeightBase = 38;
+        const lineHeight = height > 2000 ? lineHeightBase * 1.8 : lineHeightBase * 1.2;  // Match font size scaling
 
         // Calculate how many lines can fit with padding
         const maxLines = Math.floor((lyricsContainerHeight - 80) / lineHeight);
