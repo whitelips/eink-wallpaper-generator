@@ -94,8 +94,7 @@ In the silence, hear my voice`,
         ],
         
         // Footer links
-        changelogLink: "📝 Changelog",
-        githubLink: "📚 GitHub"
+        changelogLink: "📝 Changelog"
     },
 
     ko: {
@@ -192,8 +191,7 @@ In the silence, hear my voice`,
         ],
         
         // Footer links
-        changelogLink: "📝 변경 로그",
-        githubLink: "📚 GitHub"
+        changelogLink: "📝 변경 로그"
     }
 };
 
@@ -389,7 +387,6 @@ function updateFooterContent() {
     
     // Update footer links
     updateTextContent('#changelog-link', lang.changelogLink);
-    updateTextContent('#github-link', lang.githubLink);
 }
 
 // Export functions for use in other scripts
