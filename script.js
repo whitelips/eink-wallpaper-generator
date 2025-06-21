@@ -278,8 +278,10 @@ function generatePattern() {
     const barHeight = 8;  // Increased from 4px for better visibility
 
     // Time labels - larger font size, positioned outside the progress bar
+    const timeBaseSize = 18;
+    const timeFontSize = height > 1800 ? timeBaseSize * 1.5 : timeBaseSize;  // 150% for height > 1800
     ctx.fillStyle = '#999';
-    ctx.font = '400 18px -apple-system, Arial';  // Increased from 13px
+    ctx.font = `400 ${timeFontSize}px -apple-system, Arial`;
     ctx.textBaseline = 'middle';  // Center text vertically
     ctx.textAlign = 'right';
     ctx.fillText('1:03', barX - 20, progressY + barHeight / 2);  // Left side, centered with progress bar
