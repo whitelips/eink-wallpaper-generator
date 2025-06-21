@@ -2,13 +2,13 @@
 const languages = {
     en: {
         // Page title and headers
-        pageTitle: "E-Ink Music Player Wallpaper Generator | Free Online Tool for E-Reader Displays",
-        mainTitle: "E-Ink Music Player Wallpaper Generator",
-        subtitle: "Create custom music player wallpapers optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, and other e-readers.",
+        pageTitle: "E-Ink Music Player Lockscreen Generator | Free Online Tool for E-Reader Displays",
+        mainTitle: "E-Ink Music Player Lockscreen Generator",
+        subtitle: "Create custom music player lockscreens optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, and other e-readers.",
         
         // SEO Meta
-        metaDescription: "Create custom music player wallpapers optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, and other e-readers. Apple Music style with real-time preview.",
-        metaKeywords: "e-ink wallpaper, e-reader wallpaper, music player wallpaper, Onyx Boox wallpaper, reMarkable wallpaper, Supernote wallpaper, e-ink display, grayscale wallpaper, Apple Music style",
+        metaDescription: "Create custom music player lockscreens optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, and other e-readers. Apple Music style with real-time preview.",
+        metaKeywords: "e-ink lockscreen, e-reader lockscreen, music player lockscreen, Onyx Boox lockscreen, reMarkable lockscreen, Supernote lockscreen, e-ink display, grayscale lockscreen, Apple Music style",
 
         // Form labels and controls
         devicePreset: "Device Preset:",
@@ -30,7 +30,7 @@ const languages = {
         color: "Color",
 
         // Buttons
-        generateWallpaper: "Generate Wallpaper",
+        generateWallpaper: "Generate Lockscreen",
         downloadPng: "Download PNG",
         
         // Alert messages
@@ -67,11 +67,11 @@ Simple pleasures, simple joys
 In the silence, hear my voice`,
         
         // Footer content
-        aboutTitle: "About E-Ink Wallpaper Generator",
-        aboutDescription: "Create stunning music player wallpapers designed specifically for e-ink displays. Our free online tool supports popular e-reader brands including",
+        aboutTitle: "About E-Ink Lockscreen Generator",
+        aboutDescription: "Create stunning music player lockscreens designed specifically for e-ink displays. Our free online tool supports popular e-reader brands including",
         supportedModelsTitle: "Supported E-Reader Models",
         featuresTitle: "Features",
-        footerNote: "Perfect for personalizing your e-reader with custom music-themed wallpapers. All generated wallpapers are optimized for the unique characteristics of e-ink displays.",
+        footerNote: "Perfect for personalizing your e-reader with custom music-themed lockscreens. All generated lockscreens are optimized for the unique characteristics of e-ink displays.",
         
         // Device descriptions
         deviceDescriptions: {
@@ -96,13 +96,13 @@ In the silence, hear my voice`,
 
     ko: {
         // Page title and headers
-        pageTitle: "전자잉크 음악 플레이어 배경화면 생성기 | 무료 온라인 이북 리더기 도구",
-        mainTitle: "전자잉크 음악 플레이어 배경화면 생성기",
-        subtitle: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 배경화면을 만들어보세요. 오닉스 북스, 리마커블, 슈퍼노트 등 다양한 이북 리더기를 지원하는 무료 온라인 도구입니다.",
+        pageTitle: "전자잉크 음악 플레이어 잠금화면 생성기 | 무료 온라인 이북 리더기 도구",
+        mainTitle: "전자잉크 음악 플레이어 잠금화면 생성기",
+        subtitle: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 잠금화면을 만들어보세요. 오닉스 북스, 리마커블, 슈퍼노트 등 다양한 이북 리더기를 지원하는 무료 온라인 도구입니다.",
         
         // SEO Meta
-        metaDescription: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 배경화면을 만들어보세요. 오닉스 북스, 리마커블, 슈퍼노트 등 다양한 이북 리더기 지원. 애플 뮤직 스타일의 실시간 미리보기 제공.",
-        metaKeywords: "전자잉크 배경화면, 이북 리더기 배경화면, 음악 플레이어 배경화면, 오닉스 북스 배경화면, 리마커블 배경화면, 슈퍼노트 배경화면, 전자잉크 디스플레이, 그레이스케일 배경화면, 애플 뮤직 스타일",
+        metaDescription: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 잠금화면을 만들어보세요. 오닉스 북스, 리마커블, 슈퍼노트 등 다양한 이북 리더기 지원. 애플 뮤직 스타일의 실시간 미리보기 제공.",
+        metaKeywords: "전자잉크 잠금화면, 이북 리더기 잠금화면, 음악 플레이어 잠금화면, 오닉스 북스 잠금화면, 리마커블 잠금화면, 슈퍼노트 잠금화면, 전자잉크 디스플레이, 그레이스케일 잠금화면, 애플 뮤직 스타일",
 
         // Form labels and controls
         devicePreset: "기기 프리셋:",
@@ -124,7 +124,7 @@ In the silence, hear my voice`,
         color: "컬러",
 
         // Buttons
-        generateWallpaper: "배경화면 생성",
+        generateWallpaper: "잠금화면 생성",
         downloadPng: "PNG 다운로드",
         
         // Alert messages
@@ -161,11 +161,11 @@ In the silence, hear my voice`,
 고요함 속에서, 내 목소리를 들어`,
         
         // Footer content
-        aboutTitle: "전자잉크 배경화면 생성기 소개",
-        aboutDescription: "전자잉크 디스플레이를 위해 특별히 설계된 멋진 음악 플레이어 배경화면을 만들어보세요. 저희 무료 온라인 도구는 인기 있는 이북 리더기 브랜드를 지원합니다:",
+        aboutTitle: "전자잉크 잠금화면 생성기 소개",
+        aboutDescription: "전자잉크 디스플레이를 위해 특별히 설계된 멋진 음악 플레이어 잠금화면을 만들어보세요. 저희 무료 온라인 도구는 인기 있는 이북 리더기 브랜드를 지원합니다:",
         supportedModelsTitle: "지원되는 이북 리더기 모델",
         featuresTitle: "기능",
-        footerNote: "맞춤형 음악 테마 배경화면으로 이북 리더기를 개인화하기에 완벽합니다. 모든 생성된 배경화면은 전자잉크 디스플레이의 고유한 특성에 최적화되어 있습니다.",
+        footerNote: "맞춤형 음악 테마 잠금화면으로 이북 리더기를 개인화하기에 완벽합니다. 모든 생성된 잠금화면은 전자잉크 디스플레이의 고유한 특성에 최적화되어 있습니다.",
         
         // Device descriptions
         deviceDescriptions: {

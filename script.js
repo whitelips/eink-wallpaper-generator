@@ -413,14 +413,14 @@ function generatePattern() {
 
 }
 
-function downloadWallpaper() {
+function downloadLockscreen() {
     const link = document.createElement('a');
-    link.download = `eink-wallpaper-${Date.now()}.png`;
+    link.download = `eink-lockscreen-${Date.now()}.png`;
     link.href = canvas.toDataURL();
     link.click();
 }
 
-downloadBtn.addEventListener('click', downloadWallpaper);
+downloadBtn.addEventListener('click', downloadLockscreen);
 
 // Language functionality
 function updateLanguageButtons() {

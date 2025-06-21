@@ -1,6 +1,6 @@
-# E-Ink Music Player Wallpaper Generator
+# E-Ink Music Player Lockscreen Generator
 
-A web application to create Apple Music-style wallpapers optimized for e-ink displays.
+A web application to create Apple Music-style lockscreens optimized for e-ink displays.
 
 ## Features
 
@@ -47,12 +47,12 @@ A web application to create Apple Music-style wallpapers optimized for e-ink dis
 3. **Upload Album Art**: Add your album cover image
 4. **Enter Details**: Fill in artist name, song title, and lyrics
 5. **Customize**: Adjust color mode, contrast, and dithering
-6. **Download**: Save your generated wallpaper as PNG
+6. **Download**: Save your generated lockscreen as PNG
 
 ## Technology Stack
 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Canvas API**: For wallpaper generation and image processing
+- **Canvas API**: For lockscreen generation and image processing
 - **Internationalization**: Multi-language support system
 - **GitHub Pages**: Static site hosting
 
@@ -113,4 +113,4 @@ MIT License - feel free to use and modify for your projects.
 
 ---
 
-Perfect for creating custom wallpapers for your e-ink e-reader or tablet!
+Perfect for creating custom lockscreens for your e-ink e-reader or tablet!
