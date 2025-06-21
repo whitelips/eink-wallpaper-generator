@@ -30,7 +30,8 @@ const devicePresets = {
     'supernote-a5x-a6x-nomad': { width: 1404, height: 1872 },
     'supernote-manta': { width: 1920, height: 2560 },
     // Kyobo devices
-    'kyobo-sam-7-8-10-plus': { width: 1404, height: 1872 },
+    'kyobo-sam-7-8': { width: 1404, height: 1872 },
+    'kyobo-sam-10-plus': { width: 1200, height: 1600 },
     // Hisense devices
     'hisense-a5': { width: 720, height: 1440 },
     'hisense-a7': { width: 900, height: 1800 },

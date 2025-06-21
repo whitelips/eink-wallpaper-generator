@@ -78,7 +78,7 @@ In the silence, hear my voice`,
             boox: "Poke series, Palma, Page, Note Air, Tab series, Note Lumi, Note Max",
             remarkable: "reMarkable 1, reMarkable 2, reMarkable Paper Pro",
             supernote: "A5X, A6X, Nomad, Manta",
-            kyobo: "Sam 7.8/10+",
+            kyobo: "Sam 7.8, Sam 10+",
             others: "Crema, Innospaceone, Hisense e-ink devices"
         },
         
@@ -172,7 +172,7 @@ In the silence, hear my voice`,
             boox: "Poke 시리즈, Palma, Page, Note Air, Tab 시리즈, Note Lumi, Note Max",
             remarkable: "리마커블 1, 리마커블 2, 리마커블 Paper Pro",
             supernote: "A5X, A6X, Nomad, Manta",
-            kyobo: "Sam 7.8/10+",
+            kyobo: "Sam 7.8, Sam 10+",
             others: "크레마, 이노스페이스원, 하이센스 전자잉크 기기"
         },
         
