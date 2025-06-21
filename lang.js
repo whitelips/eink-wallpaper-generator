@@ -91,7 +91,11 @@ In the silence, hear my voice`,
             "✓ Multi-language support (English & Korean)",
             "✓ Free PNG download",
             "✓ 25+ device presets with accurate resolutions"
-        ]
+        ],
+        
+        // Footer links
+        changelogLink: "📝 Changelog",
+        githubLink: "📚 GitHub"
     },
 
     ko: {
@@ -185,7 +189,11 @@ In the silence, hear my voice`,
             "✓ 다국어 지원 (영어 & 한국어)",
             "✓ 무료 PNG 다운로드",
             "✓ 25개 이상의 정확한 해상도의 기기 프리셋"
-        ]
+        ],
+        
+        // Footer links
+        changelogLink: "📝 변경 로그",
+        githubLink: "📚 GitHub"
     }
 };
 
@@ -378,6 +386,10 @@ function updateFooterContent() {
     if (featuresList) {
         featuresList.innerHTML = lang.features.map(feature => `<li>${feature}</li>`).join('');
     }
+    
+    // Update footer links
+    updateTextContent('#changelog-link', lang.changelogLink);
+    updateTextContent('#github-link', lang.githubLink);
 }
 
 // Export functions for use in other scripts
