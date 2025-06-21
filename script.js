@@ -111,6 +111,72 @@ heightInput.addEventListener('input', generatePattern);
 
 
 
+// Proportional scaling system for components
+function calculateScaleFactor(value, minValue, maxValue, minScale, maxScale) {
+    // Linear interpolation between min and max scales based on value
+    const ratio = (value - minValue) / (maxValue - minValue);
+    const clampedRatio = Math.max(0, Math.min(1, ratio)); // Clamp between 0 and 1
+    return minScale + (maxScale - minScale) * clampedRatio;
+}
+
+// Get component sizes based on device resolution
+function getComponentSizes(width, height) {
+    // Define resolution ranges
+    const minHeight = 1440; // Smallest device (Hisense A5)
+    const maxHeight = 3200; // Largest device (Boox Note Max)
+    
+    // Calculate scale factor based on height (more important for readability)
+    const heightScale = calculateScaleFactor(height, minHeight, maxHeight, 1.0, 2.0);
+    
+    // Base sizes (designed for minimum resolution)
+    const baseSizes = {
+        // Text sizes
+        titleBase: Math.min(width, height) / 40,
+        artistBase: Math.min(width, height) / 40,
+        lyricsBase: 24,
+        timeBase: 18,
+        
+        // UI elements
+        progressBarHeight: 8,
+        controlSize: 24,
+        controlSpacing: 120,
+        
+        // Spacing
+        titleSpacing: 50,
+        artistSpacing: 15,
+        progressSpacing: 60,
+        controlsSpacing: 60,
+        lyricsSpacing: 80
+    };
+    
+    // Apply proportional scaling
+    return {
+        // Font sizes with proportional scaling
+        titleFontSize: baseSizes.titleBase * 1.8 * heightScale,
+        artistFontSize: baseSizes.artistBase * 1.3 * heightScale,
+        lyricsFontSize: baseSizes.lyricsBase * heightScale,
+        timeFontSize: baseSizes.timeBase * heightScale,
+        
+        // UI elements
+        progressBarHeight: baseSizes.progressBarHeight * heightScale,
+        skipSize: baseSizes.controlSize * heightScale,
+        pauseSize: baseSizes.controlSize * 1.17 * heightScale, // Maintain proportion
+        pauseBarWidth: baseSizes.controlSize * 0.58 * heightScale,
+        pauseGap: baseSizes.controlSize * 0.67 * heightScale,
+        controlSpacing: baseSizes.controlSpacing * heightScale,
+        
+        // Spacing with proportional scaling
+        titleY: 80 * heightScale,
+        artistSpacing: 25 * heightScale,
+        progressSpacing: 80 * heightScale,
+        controlsSpacing: 90 * heightScale,
+        lyricsSpacing: 110 * heightScale,
+        
+        // Line heights
+        lyricsLineHeight: 38 * heightScale
+    };
+}
+
 function generatePattern() {
     const width = parseInt(widthInput.value);
     const height = parseInt(heightInput.value);
@@ -120,6 +186,9 @@ function generatePattern() {
 
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, width, height);
+
+    // Get proportionally scaled sizes
+    const sizes = getComponentSizes(width, height);
 
     // Music Player Pattern - Apple Music Style
     const artist = artistInput.value || 'Artist Name';
@@ -241,17 +310,12 @@ function generatePattern() {
     }
     ctx.restore();
 
-    // Title and Artist with Apple Music typography - increased spacing
-    const titleY = albumY + albumSize + 80;  // Increased from 50
-
-    // Calculate responsive font sizes - increased by 20%
-    const baseFontSize = Math.min(width, height) / 40;
-    const titleFontSize = baseFontSize * 1.8 * 1.2;  // 20% increase
-    const artistFontSize = baseFontSize * 1.3 * 1.2;  // 20% increase
+    // Title and Artist with Apple Music typography - proportional spacing
+    const titleY = albumY + albumSize + sizes.titleY;
 
     // Title - larger, bold
     ctx.fillStyle = '#000';
-    ctx.font = `600 ${titleFontSize}px -apple-system, Arial`;
+    ctx.font = `600 ${sizes.titleFontSize}px -apple-system, Arial`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
 
@@ -266,33 +330,29 @@ function generatePattern() {
     }
     ctx.fillText(displayTitle, width / 2, titleY);
 
-    // Artist - smaller, regular weight, gray - increased spacing
+    // Artist - smaller, regular weight, gray - proportional spacing
     ctx.fillStyle = '#666';
-    ctx.font = `400 ${artistFontSize}px -apple-system, Arial`;
-    ctx.fillText(artist, width / 2, titleY + titleFontSize + 25);  // Increased from 15
+    ctx.font = `400 ${sizes.artistFontSize}px -apple-system, Arial`;
+    ctx.fillText(artist, width / 2, titleY + sizes.titleFontSize + sizes.artistSpacing);
 
-    // Progress bar - Apple Music style - increased spacing
-    const progressY = titleY + titleFontSize + artistFontSize + 80;  // Increased spacing
-    const barWidth = width * 0.5;  // Reduced width to leave more space for larger time labels
+    // Progress bar - Apple Music style - proportional spacing
+    const progressY = titleY + sizes.titleFontSize + sizes.artistFontSize + sizes.progressSpacing;
+    const barWidth = width * 0.5;
     const barX = (width - barWidth) / 2;
-    const barHeightBase = 8;
-    const barHeight = height > 1800 ? barHeightBase * 1.8 : barHeightBase;  // 180% for height > 1800
 
-    // Time labels - larger font size, positioned outside the progress bar
-    const timeBaseSize = 18;
-    const timeFontSize = height > 1800 ? timeBaseSize * 1.5 : timeBaseSize;  // 150% for height > 1800
+    // Time labels - proportional font size
     ctx.fillStyle = '#999';
-    ctx.font = `400 ${timeFontSize}px -apple-system, Arial`;
-    ctx.textBaseline = 'middle';  // Center text vertically
+    ctx.font = `400 ${sizes.timeFontSize}px -apple-system, Arial`;
+    ctx.textBaseline = 'middle';
     ctx.textAlign = 'right';
-    ctx.fillText('1:03', barX - 20, progressY + barHeight / 2);  // Left side, centered with progress bar
+    ctx.fillText('1:03', barX - 20, progressY + sizes.progressBarHeight / 2);
     ctx.textAlign = 'left';
-    ctx.fillText('2:07', barX + barWidth + 20, progressY + barHeight / 2);  // Right side, centered with progress bar
+    ctx.fillText('2:07', barX + barWidth + 20, progressY + sizes.progressBarHeight / 2);
 
     // Progress bar background - rounded corners
     ctx.fillStyle = '#e5e5e5';
     ctx.beginPath();
-    ctx.roundRect(barX, progressY, barWidth, barHeight, barHeight / 2);
+    ctx.roundRect(barX, progressY, barWidth, sizes.progressBarHeight, sizes.progressBarHeight / 2);
     ctx.fill();
 
     // Progress bar foreground - filled portion with rounded corners
@@ -300,74 +360,68 @@ function generatePattern() {
     const filledWidth = barWidth * progress;
     ctx.fillStyle = '#333';
     ctx.beginPath();
-    ctx.roundRect(barX, progressY, filledWidth, barHeight, barHeight / 2);
+    ctx.roundRect(barX, progressY, filledWidth, sizes.progressBarHeight, sizes.progressBarHeight / 2);
     ctx.fill();
 
-    // Playback controls - Apple Music style - increased spacing
-    const controlsY = progressY + 90;  // Increased from 60
-    const controlSpacing = 240;  // Doubled from 120
+    // Playback controls - Apple Music style - proportional spacing
+    const controlsY = progressY + sizes.controlsSpacing;
     const controlsX = width / 2;
 
     // Previous track (skip backward)
     ctx.fillStyle = '#000';
     ctx.strokeStyle = '#000';
-    ctx.lineWidth = 6;  // Increased thickness
+    ctx.lineWidth = 6;
 
-    // Skip backward icon - reduced height
-    const skipSize = 24;  // Reduced height from 36
-    const skipGap = 12;   // Gap between triangles
+    // Skip backward icon - proportional sizing
+    const skipGap = sizes.skipSize * 0.5;
 
     // First triangle (left)
     ctx.beginPath();
-    ctx.moveTo(controlsX - controlSpacing + skipSize / 2 - skipGap / 2, controlsY - skipSize);
-    ctx.lineTo(controlsX - controlSpacing - skipSize / 2 - skipGap / 2, controlsY);
-    ctx.lineTo(controlsX - controlSpacing + skipSize / 2 - skipGap / 2, controlsY + skipSize);
+    ctx.moveTo(controlsX - sizes.controlSpacing + sizes.skipSize / 2 - skipGap / 2, controlsY - sizes.skipSize);
+    ctx.lineTo(controlsX - sizes.controlSpacing - sizes.skipSize / 2 - skipGap / 2, controlsY);
+    ctx.lineTo(controlsX - sizes.controlSpacing + sizes.skipSize / 2 - skipGap / 2, controlsY + sizes.skipSize);
     ctx.closePath();
     ctx.fill();
 
     // Second triangle (right)
     ctx.beginPath();
-    ctx.moveTo(controlsX - controlSpacing + skipSize + skipGap / 2, controlsY - skipSize);
-    ctx.lineTo(controlsX - controlSpacing + skipGap / 2, controlsY);
-    ctx.lineTo(controlsX - controlSpacing + skipSize + skipGap / 2, controlsY + skipSize);
+    ctx.moveTo(controlsX - sizes.controlSpacing + sizes.skipSize + skipGap / 2, controlsY - sizes.skipSize);
+    ctx.lineTo(controlsX - sizes.controlSpacing + skipGap / 2, controlsY);
+    ctx.lineTo(controlsX - sizes.controlSpacing + sizes.skipSize + skipGap / 2, controlsY + sizes.skipSize);
     ctx.closePath();
     ctx.fill();
 
-    // Pause button - reduced height
-    const pauseSize = 28;  // Reduced height from 40
-    const pauseBarWidth = 14;  // Keep width the same
-    const pauseGap = 16;  // Keep gap the same
+    // Pause button - proportional sizing
+    ctx.fillRect(controlsX - sizes.pauseGap / 2 - sizes.pauseBarWidth, controlsY - sizes.pauseSize, sizes.pauseBarWidth, sizes.pauseSize * 2);
+    ctx.fillRect(controlsX + sizes.pauseGap / 2, controlsY - sizes.pauseSize, sizes.pauseBarWidth, sizes.pauseSize * 2);
 
-    ctx.fillRect(controlsX - pauseGap / 2 - pauseBarWidth, controlsY - pauseSize, pauseBarWidth, pauseSize * 2);
-    ctx.fillRect(controlsX + pauseGap / 2, controlsY - pauseSize, pauseBarWidth, pauseSize * 2);
-
-    // Skip forward icon - reduced height
+    // Skip forward icon - proportional sizing
     // First triangle (left)
     ctx.beginPath();
-    ctx.moveTo(controlsX + controlSpacing - skipSize - skipGap / 2, controlsY - skipSize);
-    ctx.lineTo(controlsX + controlSpacing - skipGap / 2, controlsY);
-    ctx.lineTo(controlsX + controlSpacing - skipSize - skipGap / 2, controlsY + skipSize);
+    ctx.moveTo(controlsX + sizes.controlSpacing - sizes.skipSize - skipGap / 2, controlsY - sizes.skipSize);
+    ctx.lineTo(controlsX + sizes.controlSpacing - skipGap / 2, controlsY);
+    ctx.lineTo(controlsX + sizes.controlSpacing - sizes.skipSize - skipGap / 2, controlsY + sizes.skipSize);
     ctx.closePath();
     ctx.fill();
 
     // Second triangle (right)
     ctx.beginPath();
-    ctx.moveTo(controlsX + controlSpacing - skipSize / 2 + skipGap / 2, controlsY - skipSize);
-    ctx.lineTo(controlsX + controlSpacing + skipSize / 2 + skipGap / 2, controlsY);
-    ctx.lineTo(controlsX + controlSpacing - skipSize / 2 + skipGap / 2, controlsY + skipSize);
+    ctx.moveTo(controlsX + sizes.controlSpacing - sizes.skipSize / 2 + skipGap / 2, controlsY - sizes.skipSize);
+    ctx.lineTo(controlsX + sizes.controlSpacing + sizes.skipSize / 2 + skipGap / 2, controlsY);
+    ctx.lineTo(controlsX + sizes.controlSpacing - sizes.skipSize / 2 + skipGap / 2, controlsY + sizes.skipSize);
     ctx.closePath();
     ctx.fill();
 
-    // Lyrics section - Apple Music style - increased spacing
+    // Lyrics section - Apple Music style - proportional spacing
     if (lyrics) {
-        const lyricsY = controlsY + 110;  // Increased from 80
+        const lyricsY = controlsY + sizes.lyricsSpacing;
 
         // Lyrics container with subtle background and rounded corners
-        const lyricsContainerY = lyricsY - 40;  // Increased padding
-        const lyricsContainerHeight = height - lyricsContainerY - 60;  // Increased padding
-        const lyricsContainerX = width * 0.08;  // More space on sides
-        const lyricsContainerWidth = width * 0.84;  // Wider container
-        const cornerRadius = 16;  // Rounded corners
+        const lyricsContainerY = lyricsY - 40;
+        const lyricsContainerHeight = height - lyricsContainerY - 60;
+        const lyricsContainerX = width * 0.08;
+        const lyricsContainerWidth = width * 0.84;
+        const cornerRadius = 16;
 
         // Subtle background for lyrics area with rounded corners
         ctx.fillStyle = '#fafafa';
@@ -375,20 +429,16 @@ function generatePattern() {
         ctx.roundRect(lyricsContainerX, lyricsContainerY, lyricsContainerWidth, lyricsContainerHeight, cornerRadius);
         ctx.fill();
 
-        // Lyrics text - increased font size by 20% or 180% for larger displays
-        const lyricsBaseSize = 24;
-        const lyricsFontSize = height > 2000 ? lyricsBaseSize * 1.8 : lyricsBaseSize * 1.2;  // 180% for height > 2000, otherwise 120%
-        ctx.font = `400 ${lyricsFontSize}px -apple-system, Arial`;
+        // Lyrics text - proportional font size
+        ctx.font = `400 ${sizes.lyricsFontSize}px -apple-system, Arial`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillStyle = '#333';
 
         const lyricsLines = lyrics.split('\n');
-        const lineHeightBase = 38;
-        const lineHeight = height > 2000 ? lineHeightBase * 1.8 : lineHeightBase * 1.2;  // Match font size scaling
 
         // Calculate how many lines can fit with padding
-        const maxLines = Math.floor((lyricsContainerHeight - 80) / lineHeight);
+        const maxLines = Math.floor((lyricsContainerHeight - 80) / sizes.lyricsLineHeight);
         const linesToShow = Math.min(lyricsLines.length, maxLines);
 
         lyricsLines.slice(0, linesToShow).forEach((line, index) => {
@@ -396,12 +446,12 @@ function generatePattern() {
                 // Highlight current line (middle line)
                 if (index === Math.floor(linesToShow / 2)) {
                     ctx.fillStyle = '#000';
-                    ctx.font = `600 ${lyricsFontSize}px -apple-system, Arial`;
+                    ctx.font = `600 ${sizes.lyricsFontSize}px -apple-system, Arial`;
                 } else {
                     ctx.fillStyle = '#666';
-                    ctx.font = `400 ${lyricsFontSize}px -apple-system, Arial`;
+                    ctx.font = `400 ${sizes.lyricsFontSize}px -apple-system, Arial`;
                 }
-                ctx.fillText(line.trim(), width / 2, lyricsY + index * lineHeight);
+                ctx.fillText(line.trim(), width / 2, lyricsY + index * sizes.lyricsLineHeight);
             }
         });
     }
