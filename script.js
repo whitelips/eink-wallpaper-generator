@@ -275,7 +275,8 @@ function generatePattern() {
     const progressY = titleY + titleFontSize + artistFontSize + 80;  // Increased spacing
     const barWidth = width * 0.5;  // Reduced width to leave more space for larger time labels
     const barX = (width - barWidth) / 2;
-    const barHeight = 8;  // Increased from 4px for better visibility
+    const barHeightBase = 8;
+    const barHeight = height > 1800 ? barHeightBase * 1.8 : barHeightBase;  // 180% for height > 1800
 
     // Time labels - larger font size, positioned outside the progress bar
     const timeBaseSize = 18;
