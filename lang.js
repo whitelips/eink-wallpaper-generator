@@ -44,6 +44,7 @@ const languages = {
             "Crema": "Crema",
             "Innospaceone": "Innospaceone",
             "Supernote": "Supernote",
+            "Kyobo": "Kyobo",
             "Hisense": "Hisense"
         },
 
@@ -77,6 +78,7 @@ In the silence, hear my voice`,
             boox: "Poke series, Palma, Page, Note Air, Tab series, Note Lumi, Note Max",
             remarkable: "reMarkable 1, reMarkable 2, reMarkable Paper Pro",
             supernote: "A5X, A6X, Nomad, Manta",
+            kyobo: "Sam 7.8/10+",
             others: "Crema, Innospaceone, Hisense e-ink devices"
         },
         
@@ -136,6 +138,7 @@ In the silence, hear my voice`,
             "Crema": "크레마",
             "Innospaceone": "이노스페이스원",
             "Supernote": "슈퍼노트",
+            "Kyobo": "교보",
             "Hisense": "하이센스"
         },
 
@@ -169,6 +172,7 @@ In the silence, hear my voice`,
             boox: "Poke 시리즈, Palma, Page, Note Air, Tab 시리즈, Note Lumi, Note Max",
             remarkable: "리마커블 1, 리마커블 2, 리마커블 Paper Pro",
             supernote: "A5X, A6X, Nomad, Manta",
+            kyobo: "Sam 7.8/10+",
             others: "크레마, 이노스페이스원, 하이센스 전자잉크 기기"
         },
         
@@ -354,7 +358,7 @@ function updateFooterContent() {
     // Update about description
     const aboutDesc = document.querySelector('.footer p:first-of-type');
     if (aboutDesc) {
-        aboutDesc.innerHTML = `${lang.aboutDescription} <strong>Onyx Boox</strong>, <strong>reMarkable</strong>, <strong>Supernote</strong>, <strong>Crema</strong>, <strong>Innospaceone</strong>, <strong>Hisense</strong> devices.`;
+        aboutDesc.innerHTML = `${lang.aboutDescription} <strong>Onyx Boox</strong>, <strong>reMarkable</strong>, <strong>Supernote</strong>, <strong>Kyobo</strong>, <strong>Crema</strong>, <strong>Innospaceone</strong>, <strong>Hisense</strong> devices.`;
     }
     
     // Update device list
@@ -364,6 +368,7 @@ function updateFooterContent() {
             <li><strong>Onyx Boox:</strong> ${lang.deviceDescriptions.boox}</li>
             <li><strong>reMarkable:</strong> ${lang.deviceDescriptions.remarkable}</li>
             <li><strong>Supernote:</strong> ${lang.deviceDescriptions.supernote}</li>
+            <li><strong>Kyobo:</strong> ${lang.deviceDescriptions.kyobo}</li>
             <li><strong>${lang.deviceGroups["Other Devices"] || "Other brands"}:</strong> ${lang.deviceDescriptions.others}</li>
         `;
     }
