@@ -244,10 +244,10 @@ function generatePattern() {
     // Title and Artist with Apple Music typography - increased spacing
     const titleY = albumY + albumSize + 80;  // Increased from 50
 
-    // Calculate responsive font sizes
+    // Calculate responsive font sizes - increased by 20%
     const baseFontSize = Math.min(width, height) / 40;
-    const titleFontSize = baseFontSize * 1.8;
-    const artistFontSize = baseFontSize * 1.3;
+    const titleFontSize = baseFontSize * 1.8 * 1.2;  // 20% increase
+    const artistFontSize = baseFontSize * 1.3 * 1.2;  // 20% increase
 
     // Title - larger, bold
     ctx.fillStyle = '#000';
@@ -372,14 +372,15 @@ function generatePattern() {
         ctx.roundRect(lyricsContainerX, lyricsContainerY, lyricsContainerWidth, lyricsContainerHeight, cornerRadius);
         ctx.fill();
 
-        // Lyrics text - increased font size
-        ctx.font = '400 24px -apple-system, Arial';  // Increased from 18px
+        // Lyrics text - increased font size by 20%
+        const lyricsFontSize = 24 * 1.2;  // 20% increase from 24px to 28.8px
+        ctx.font = `400 ${lyricsFontSize}px -apple-system, Arial`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillStyle = '#333';
 
         const lyricsLines = lyrics.split('\n');
-        const lineHeight = 38;  // Increased from 32 for larger text
+        const lineHeight = 38 * 1.2;  // 20% increase for line height as well
 
         // Calculate how many lines can fit with padding
         const maxLines = Math.floor((lyricsContainerHeight - 80) / lineHeight);
@@ -390,10 +391,10 @@ function generatePattern() {
                 // Highlight current line (middle line)
                 if (index === Math.floor(linesToShow / 2)) {
                     ctx.fillStyle = '#000';
-                    ctx.font = '600 24px -apple-system, Arial';
+                    ctx.font = `600 ${lyricsFontSize}px -apple-system, Arial`;
                 } else {
                     ctx.fillStyle = '#666';
-                    ctx.font = '400 24px -apple-system, Arial';
+                    ctx.font = `400 ${lyricsFontSize}px -apple-system, Arial`;
                 }
                 ctx.fillText(line.trim(), width / 2, lyricsY + index * lineHeight);
             }
