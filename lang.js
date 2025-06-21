@@ -2,9 +2,13 @@
 const languages = {
     en: {
         // Page title and headers
-        pageTitle: "E-Ink Music Player Wallpaper",
-        mainTitle: "E-Ink Music Player Wallpaper",
-        subtitle: "Create music player wallpapers optimized for e-ink displays",
+        pageTitle: "E-Ink Music Player Wallpaper Generator | Free Online Tool for E-Reader Displays",
+        mainTitle: "E-Ink Music Player Wallpaper Generator",
+        subtitle: "Create custom music player wallpapers optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, and other e-readers.",
+        
+        // SEO Meta
+        metaDescription: "Create custom music player wallpapers optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, and other e-readers. Apple Music style with real-time preview.",
+        metaKeywords: "e-ink wallpaper, e-reader wallpaper, music player wallpaper, Onyx Boox wallpaper, reMarkable wallpaper, Supernote wallpaper, e-ink display, grayscale wallpaper, Apple Music style",
 
         // Form labels and controls
         devicePreset: "Device Preset:",
@@ -59,14 +63,44 @@ I find my peace in simple ways
 Coffee brewing, heart is new
 Every morning starts with you
 Simple pleasures, simple joys
-In the silence, hear my voice`
+In the silence, hear my voice`,
+        
+        // Footer content
+        aboutTitle: "About E-Ink Wallpaper Generator",
+        aboutDescription: "Create stunning music player wallpapers designed specifically for e-ink displays. Our free online tool supports popular e-reader brands including",
+        supportedModelsTitle: "Supported E-Reader Models",
+        featuresTitle: "Features",
+        footerNote: "Perfect for personalizing your e-reader with custom music-themed wallpapers. All generated wallpapers are optimized for the unique characteristics of e-ink displays.",
+        
+        // Device descriptions
+        deviceDescriptions: {
+            boox: "Poke series, Palma, Page, Note Air, Tab series, Note Lumi, Note Max",
+            remarkable: "reMarkable 1, reMarkable 2, reMarkable Paper Pro",
+            supernote: "A5X, A6X, Nomad, Manta",
+            others: "Crema, Innospaceone, Hisense e-ink devices"
+        },
+        
+        // Feature list
+        features: [
+            "✓ Apple Music inspired design",
+            "✓ Real-time preview with instant updates",
+            "✓ Custom album art upload support",
+            "✓ Grayscale optimization for e-ink displays",
+            "✓ Multi-language support (English & Korean)",
+            "✓ Free PNG download",
+            "✓ 25+ device presets with accurate resolutions"
+        ]
     },
 
     ko: {
         // Page title and headers
-        pageTitle: "전자잉크 음악 플레이어 배경화면",
-        mainTitle: "전자잉크 음악 플레이어 배경화면",
-        subtitle: "전자잉크 디스플레이에 최적화된 음악 플레이어 배경화면을 만들어보세요",
+        pageTitle: "전자잉크 음악 플레이어 배경화면 생성기 | 무료 온라인 이북 리더기 도구",
+        mainTitle: "전자잉크 음악 플레이어 배경화면 생성기",
+        subtitle: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 배경화면을 만들어보세요. 오닉스 북스, 리마커블, 슈퍼노트 등 다양한 이북 리더기를 지원하는 무료 온라인 도구입니다.",
+        
+        // SEO Meta
+        metaDescription: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 배경화면을 만들어보세요. 오닉스 북스, 리마커블, 슈퍼노트 등 다양한 이북 리더기 지원. 애플 뮤직 스타일의 실시간 미리보기 제공.",
+        metaKeywords: "전자잉크 배경화면, 이북 리더기 배경화면, 음악 플레이어 배경화면, 오닉스 북스 배경화면, 리마커블 배경화면, 슈퍼노트 배경화면, 전자잉크 디스플레이, 그레이스케일 배경화면, 애플 뮤직 스타일",
 
         // Form labels and controls
         devicePreset: "기기 프리셋:",
@@ -121,17 +155,43 @@ In the silence, hear my voice`
 커피가 우려지고, 마음이 새로워져
 매일 아침이 너와 함께 시작돼
 단순한 즐거움, 단순한 기쁨
-고요함 속에서, 내 목소리를 들어`
+고요함 속에서, 내 목소리를 들어`,
+        
+        // Footer content
+        aboutTitle: "전자잉크 배경화면 생성기 소개",
+        aboutDescription: "전자잉크 디스플레이를 위해 특별히 설계된 멋진 음악 플레이어 배경화면을 만들어보세요. 저희 무료 온라인 도구는 인기 있는 이북 리더기 브랜드를 지원합니다:",
+        supportedModelsTitle: "지원되는 이북 리더기 모델",
+        featuresTitle: "기능",
+        footerNote: "맞춤형 음악 테마 배경화면으로 이북 리더기를 개인화하기에 완벽합니다. 모든 생성된 배경화면은 전자잉크 디스플레이의 고유한 특성에 최적화되어 있습니다.",
+        
+        // Device descriptions
+        deviceDescriptions: {
+            boox: "Poke 시리즈, Palma, Page, Note Air, Tab 시리즈, Note Lumi, Note Max",
+            remarkable: "리마커블 1, 리마커블 2, 리마커블 Paper Pro",
+            supernote: "A5X, A6X, Nomad, Manta",
+            others: "크레마, 이노스페이스원, 하이센스 전자잉크 기기"
+        },
+        
+        // Feature list
+        features: [
+            "✓ 애플 뮤직 스타일 디자인",
+            "✓ 즉시 업데이트되는 실시간 미리보기",
+            "✓ 사용자 정의 앨범 아트 업로드 지원",
+            "✓ 전자잉크 디스플레이용 그레이스케일 최적화",
+            "✓ 다국어 지원 (영어 & 한국어)",
+            "✓ 무료 PNG 다운로드",
+            "✓ 25개 이상의 정확한 해상도의 기기 프리셋"
+        ]
     }
 };
 
 // Current language state
-let currentLanguage = 'en';
+let currentLanguage = 'ko';
 
-// Initialize language based on browser preference or default to English
+// Initialize language based on browser preference - Korean first, then English
 function initializeLanguage() {
     const browserLang = navigator.language.substring(0, 2);
-    currentLanguage = languages[browserLang] ? browserLang : 'en';
+    currentLanguage = browserLang === 'ko' ? 'ko' : 'en';
     updateLanguage();
 }
 
@@ -141,6 +201,17 @@ function updateLanguage() {
 
     // Update page title
     document.title = lang.pageTitle;
+    
+    // Update HTML lang attribute
+    document.getElementById('html-lang').setAttribute('lang', currentLanguage);
+    
+    // Update meta tags for SEO
+    updateMetaTag('description', lang.metaDescription);
+    updateMetaTag('keywords', lang.metaKeywords);
+    updateMetaTag('og:title', lang.mainTitle);
+    updateMetaTag('og:description', lang.metaDescription);
+    updateMetaTag('twitter:title', lang.mainTitle);
+    updateMetaTag('twitter:description', lang.metaDescription);
 
     // Update text content
     updateTextContent('h1', lang.mainTitle);
@@ -165,6 +236,18 @@ function updateLanguage() {
     // Update device preset dropdown
     updateDevicePresets();
     updateColorModeOptions();
+    
+    // Update footer content
+    updateFooterContent();
+}
+
+// Helper function to update meta tags
+function updateMetaTag(name, content) {
+    let meta = document.querySelector(`meta[name="${name}"]`) || 
+               document.querySelector(`meta[property="${name}"]`);
+    if (meta) {
+        meta.setAttribute('content', content);
+    }
 }
 
 // Helper function to update text content
@@ -247,12 +330,49 @@ function loadPreferredLanguage() {
     if (saved && languages[saved]) {
         currentLanguage = saved;
     } else {
-        // Use browser locale preference
+        // Use browser locale preference - Korean first, then English
         const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
         const langCode = locale.toLowerCase().substring(0, 2);
-        currentLanguage = languages[langCode] ? langCode : 'en';
+        currentLanguage = langCode === 'ko' ? 'ko' : 'en';
     }
     updateLanguage();
+}
+
+// Update footer content
+function updateFooterContent() {
+    const lang = languages[currentLanguage];
+    const footer = document.querySelector('.footer');
+    
+    if (!footer) return;
+    
+    // Update footer titles and descriptions
+    updateTextContent('.footer h2', lang.aboutTitle);
+    updateTextContent('.footer h3:nth-of-type(1)', lang.supportedModelsTitle);
+    updateTextContent('.footer h3:nth-of-type(2)', lang.featuresTitle);
+    updateTextContent('.footer-note', lang.footerNote);
+    
+    // Update about description
+    const aboutDesc = document.querySelector('.footer p:first-of-type');
+    if (aboutDesc) {
+        aboutDesc.innerHTML = `${lang.aboutDescription} <strong>Onyx Boox</strong>, <strong>reMarkable</strong>, <strong>Supernote</strong>, <strong>Crema</strong>, <strong>Innospaceone</strong>, <strong>Hisense</strong> devices.`;
+    }
+    
+    // Update device list
+    const deviceList = document.querySelector('.device-list');
+    if (deviceList) {
+        deviceList.innerHTML = `
+            <li><strong>Onyx Boox:</strong> ${lang.deviceDescriptions.boox}</li>
+            <li><strong>reMarkable:</strong> ${lang.deviceDescriptions.remarkable}</li>
+            <li><strong>Supernote:</strong> ${lang.deviceDescriptions.supernote}</li>
+            <li><strong>${lang.deviceGroups["Other Devices"] || "Other brands"}:</strong> ${lang.deviceDescriptions.others}</li>
+        `;
+    }
+    
+    // Update features list
+    const featuresList = document.querySelector('.features-list');
+    if (featuresList) {
+        featuresList.innerHTML = lang.features.map(feature => `<li>${feature}</li>`).join('');
+    }
 }
 
 // Export functions for use in other scripts
