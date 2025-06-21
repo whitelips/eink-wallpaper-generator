@@ -151,9 +151,9 @@ function getComponentSizes(width, height) {
     
     // Apply proportional scaling
     return {
-        // Font sizes with proportional scaling
-        titleFontSize: baseSizes.titleBase * 1.8 * heightScale,
-        artistFontSize: baseSizes.artistBase * 1.3 * heightScale,
+        // Font sizes with proportional scaling and maximum limits
+        titleFontSize: Math.min(baseSizes.titleBase * 1.8 * heightScale, 180),  // Cap at 180px
+        artistFontSize: Math.min(baseSizes.artistBase * 1.3 * heightScale, 130), // Cap at 130px
         lyricsFontSize: baseSizes.lyricsBase * heightScale,
         timeFontSize: baseSizes.timeBase * heightScale,
         
