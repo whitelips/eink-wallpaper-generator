@@ -2,13 +2,13 @@
 const languages = {
     en: {
         // Page title and headers
-        pageTitle: "E-Ink Music Player Lockscreen Generator | Free Online Tool for E-Reader Displays",
+        pageTitle: "E-Ink Music Player Lockscreen Generator | Free Tool for Kindle, Kobo, Boox & E-Readers",
         mainTitle: "E-Ink Music Player Lockscreen Generator",
-        subtitle: "Create custom music player lockscreens optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, and other e-readers.",
+        subtitle: "Create custom music player lockscreens optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, Kindle Scribe, Kobo, and 25+ e-reader models.",
         
         // SEO Meta
-        metaDescription: "Create custom music player lockscreens optimized for e-ink displays. Free online tool supporting Onyx Boox, reMarkable, Supernote, and other e-readers. Apple Music style with real-time preview.",
-        metaKeywords: "e-ink lockscreen, e-reader lockscreen, music player lockscreen, Onyx Boox lockscreen, reMarkable lockscreen, Supernote lockscreen, e-ink display, grayscale lockscreen, Apple Music style",
+        metaDescription: "Free e-ink lockscreen generator for music lovers. Create Apple Music style lockscreens for Kindle Scribe, Onyx Boox, reMarkable, Kobo Elipsa, Supernote. Custom album art, lyrics display, 25+ device presets. Download PNG instantly.",
+        metaKeywords: "e-ink lockscreen generator, e-reader wallpaper maker, kindle scribe lockscreen, kobo elipsa wallpaper, onyx boox lockscreen, remarkable 2 wallpaper, supernote lockscreen, e-ink music player, grayscale wallpaper generator, apple music lockscreen, spotify style e-ink, custom e-reader lockscreen, kindle wallpaper maker, kobo lockscreen generator, e-ink display customization, free lockscreen generator, PNG wallpaper download, e-reader personalization, digital paper lockscreen",
 
         // Form labels and controls
         devicePreset: "Device Preset:",
@@ -100,13 +100,13 @@ In the silence, hear my voice`,
 
     ko: {
         // Page title and headers
-        pageTitle: "전자잉크 음악 플레이어 잠금화면 생성기 | 무료 온라인 이북 리더기 도구",
+        pageTitle: "전자잉크 음악 플레이어 잠금화면 생성기 | 크레마, 교보, 오닉스 북스 배경화면 무료 제작",
         mainTitle: "전자잉크 음악 플레이어 잠금화면 생성기",
-        subtitle: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 잠금화면을 만들어보세요. 오닉스 북스, 리마커블, 슈퍼노트 등 다양한 이북 리더기를 지원하는 무료 온라인 도구입니다.",
+        subtitle: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 잠금화면을 만들어보세요. 크레마, 교보 샘, 오닉스 북스, 리마커블, 슈퍼노트 등 25개 이상의 이북 리더기 모델 지원.",
         
         // SEO Meta
-        metaDescription: "전자잉크 디스플레이에 최적화된 맞춤형 음악 플레이어 잠금화면을 만들어보세요. 오닉스 북스, 리마커블, 슈퍼노트 등 다양한 이북 리더기 지원. 애플 뮤직 스타일의 실시간 미리보기 제공.",
-        metaKeywords: "전자잉크 잠금화면, 이북 리더기 잠금화면, 음악 플레이어 잠금화면, 오닉스 북스 잠금화면, 리마커블 잠금화면, 슈퍼노트 잠금화면, 전자잉크 디스플레이, 그레이스케일 잠금화면, 애플 뮤직 스타일",
+        metaDescription: "무료 전자잉크 잠금화면 생성기. 크레마 커피, 교보 샘, 오닉스 북스, 리마커블, 코보, 슈퍼노트용 애플 뮤직 스타일 잠금화면 제작. 앨범 아트, 가사 표시, 25개+ 기기 프리셋. PNG 즉시 다운로드.",
+        metaKeywords: "전자잉크 잠금화면 생성기, 이북리더기 배경화면 만들기, 크레마 잠금화면, 교보 샘 배경화면, 오닉스 북스 잠금화면, 리마커블 2 배경화면, 슈퍼노트 잠금화면, 전자책 배경화면, 전자잉크 음악 플레이어, 흑백 배경화면 생성기, 애플뮤직 잠금화면, 스포티파이 스타일 전자잉크, 맞춤 이북리더기 잠금화면, 크레마 커피 배경화면, 코보 잠금화면 생성기, 전자잉크 디스플레이 커스터마이징, 무료 잠금화면 생성기, PNG 배경화면 다운로드, 이북리더기 개인화, 디지털 페이퍼 잠금화면",
 
         // Form labels and controls
         devicePreset: "기기 프리셋:",
