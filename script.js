@@ -61,6 +61,7 @@ const albumArtInput = document.getElementById('albumArtInput');
 const artistInput = document.getElementById('artistInput');
 const titleInput = document.getElementById('titleInput');
 const lyricsInput = document.getElementById('lyricsInput');
+const rightTimeInput = document.getElementById('rightTimeInput');
 const colorModeSelect = document.getElementById('colorModeSelect');
 
 let uploadedAlbumArt = null;
@@ -99,6 +100,81 @@ albumArtInput.addEventListener('change', (e) => {
     }
 });
 
+
+// Format time input to ensure it's always in MM:SS format
+function formatTimeInput(input) {
+    // Store cursor position and previous value
+    const cursorPos = input.selectionStart;
+    const prevValue = input.value;
+    
+    // Remove all non-numeric characters and the colon
+    let value = input.value.replace(/[^\d:]/g, '');
+    
+    // Remove existing colons to reformat
+    value = value.replace(/:/g, '');
+    
+    // Limit to 4 digits
+    if (value.length > 4) {
+        value = value.slice(0, 4);
+    }
+    
+    // Format as MM:SS only when we have enough digits
+    let newCursorPos = cursorPos;
+    
+    if (value.length === 4) {
+        const minutes = value.slice(0, 2);
+        const seconds = value.slice(2, 4);
+        // Ensure seconds don't exceed 59
+        const validSeconds = Math.min(parseInt(seconds), 59).toString().padStart(2, '0');
+        input.value = `${minutes}:${validSeconds}`;
+        
+        // Adjust cursor position if we're typing and a colon was inserted
+        if (prevValue.length < input.value.length && cursorPos >= 2) {
+            newCursorPos = cursorPos + 1;
+        }
+    } else if (value.length === 3) {
+        // For 3 digits, format as M:SS
+        const minutes = value.slice(0, 1);
+        const seconds = value.slice(1, 3);
+        const validSeconds = Math.min(parseInt(seconds), 59).toString().padStart(2, '0');
+        input.value = `${minutes}:${validSeconds}`;
+        
+        // Adjust cursor position if we're typing and a colon was inserted
+        if (prevValue.length < input.value.length && cursorPos >= 1) {
+            newCursorPos = cursorPos + 1;
+        }
+    } else {
+        // For 1-2 digits, just show the raw value
+        input.value = value;
+    }
+    
+    // Set cursor position to the end if we're adding characters
+    if (prevValue.length < input.value.length) {
+        newCursorPos = input.value.length;
+    }
+    
+    // Restore cursor position
+    input.setSelectionRange(newCursorPos, newCursorPos);
+}
+
+// Add special handling for duration input
+rightTimeInput.addEventListener('input', (e) => {
+    formatTimeInput(e.target);
+    generatePattern();
+});
+
+// Handle blur event to ensure proper formatting when user leaves the field
+rightTimeInput.addEventListener('blur', (e) => {
+    const value = e.target.value.replace(/[^\d]/g, '');
+    if (value.length === 0) {
+        e.target.value = '00:00';
+    } else if (value.length === 1) {
+        e.target.value = `00:0${value}`;
+    } else if (value.length === 2) {
+        e.target.value = `00:${value}`;
+    }
+    generatePattern();
+});
 
 // Real-time updates for all form inputs
 artistInput.addEventListener('input', generatePattern);
@@ -341,13 +417,31 @@ function generatePattern() {
     const barX = (width - barWidth) / 2;
 
     // Time labels - proportional font size
+    const duration = rightTimeInput.value || '02:07';
+    
+    // Calculate current time as half of duration (showing playback at 50%)
+    function calculateCurrentTime(duration) {
+        const parts = duration.split(':');
+        if (parts.length !== 2) return '00:00';
+        
+        const minutes = parseInt(parts[0]) || 0;
+        const seconds = parseInt(parts[1]) || 0;
+        const totalSeconds = minutes * 60 + seconds;
+        const halfSeconds = Math.floor(totalSeconds / 2);
+        const currentMinutes = Math.floor(halfSeconds / 60);
+        const currentSeconds = halfSeconds % 60;
+        return `${currentMinutes.toString().padStart(2, '0')}:${currentSeconds.toString().padStart(2, '0')}`;
+    }
+    
+    const currentTime = calculateCurrentTime(duration);
+    
     ctx.fillStyle = '#999';
     ctx.font = `400 ${sizes.timeFontSize}px -apple-system, Arial`;
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'right';
-    ctx.fillText('1:03', barX - 20, progressY + sizes.progressBarHeight / 2);
+    ctx.fillText(currentTime, barX - 20, progressY + sizes.progressBarHeight / 2);
     ctx.textAlign = 'left';
-    ctx.fillText('2:07', barX + barWidth + 20, progressY + sizes.progressBarHeight / 2);
+    ctx.fillText(duration, barX + barWidth + 20, progressY + sizes.progressBarHeight / 2);
 
     // Progress bar background - rounded corners
     ctx.fillStyle = '#e5e5e5';

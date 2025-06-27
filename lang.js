@@ -23,6 +23,7 @@ const languages = {
         title: "Title:",
         lyrics: "Lyrics (optional):",
         lyricsPlaceholder: "Enter lyrics...",
+        duration: "Duration:",
 
         // Settings
         colorMode: "Color Mode:",
@@ -120,6 +121,7 @@ In the silence, hear my voice`,
         title: "제목:",
         lyrics: "가사 (선택사항):",
         lyricsPlaceholder: "가사를 입력하세요...",
+        duration: "노래 길이:",
 
         // Settings
         colorMode: "색상 모드:",
@@ -234,6 +236,7 @@ function updateLanguage() {
     updateTextContent('label[for="artistInput"]', lang.artist);
     updateTextContent('label[for="titleInput"]', lang.title);
     updateTextContent('label[for="lyricsInput"]', lang.lyrics);
+    updateTextContent('label[for="rightTimeInput"]', lang.duration);
     updateTextContent('label[for="colorModeSelect"]', lang.colorMode);
     updateTextContent('#downloadBtn', lang.downloadPng);
 
